@@ -1,2 +1,9 @@
 language: node_js
 node_js: node
+deploy: https://afternoon-dusk-20040.herokuapp.com/
+  provider: heroku
+  api_key:
+    secure: psH7FAEPtpxZti3ga6AZgMueGuR7t7tzprDy9N5N9V85QBKWgX80k/GK7SgMffQjR+3zzcPs2EfywoynSSmxs3+j5kjJwkFwzJsLj9zOEy/f2asIOcVnFxENTf+xJQ5V/UQOJBX1ahdYmKQOQ1w3+ngOlKSgRfGpwQOa21axFf6pSk8uE6t6z/oXeXpOLgJjqhiTzKqaNh/GUlJ6CZKrq0tCXRjL++0skpTM/7C8mip8jGrj9R8ZO1eXaazaKbplUbezvM0Li/Sbs36Y55HfrWmAWjMfdIxP0bIEGcM9hGYSlOeLKTTgVux4yKakbi4rLrpkgQvGERxzW+38D9ybkGCdQt6r9I9gXaGhaXVYHuYcgaWAn9Ttxj5zVwFXJT/1URlh8JTNCBZLBGfJmfzT0OBOPXrtOQlU7aAPVfponT2OJARahn8zhZXCgssGBtjnPk89q6Ol9yOZELxt8HaUbt+PidMM4kJh3WXJJKfKw1oXhRjl2TDa6AquVG+MlxpEKhSOfTzgapUxunSr2+Cl9zLf0RD68i9r8OjFEe7Sv2Y0e+kIc/Ca0nHU2dOdXKpC7Z+5UqCdMSdALzOnygFagNg2hJ0dyylyeDlWA9ahJ21cHMbH6F1HFN3It0m845UJGr/2CFf6JzLqgbsE+VDLHvQzPs8VKKpzd63AWMqO/RU=
+  app: For-the-Hunt-
+  on:
+    repo: lakerfan1994/For-the-Hunt-
