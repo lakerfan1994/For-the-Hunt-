@@ -1,0 +1,37 @@
+
+
+.nav-container {
+  display: flex;
+  width: 100%;
+  background-color: aqua
+}
+
+body {
+  margin: 0px;
+}
+
+.nav-button {
+  flex: 1;
+}
+
+.centered-text{
+  text-align: center;
+}
+
+.dashboard {
+  margin-top: 100px;
+  height: 500px;
+  display: flex;
+}
+
+.most-recent-main {
+  flex: 1;
+  height: 100%;
+}
+
+.most-recent {
+  margin-left: 10%;
+  margin-right: 10%;
+  border: solid black 1px;
+  height: 100%
+}
