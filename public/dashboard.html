@@ -24,7 +24,7 @@
     </nav>
     <main>
 
-      <div class="dashboard">
+      <div class="dashboard hidden ">
         <div class="most-recent-main">
             <h2 class= "centered-text">Most Recent Applications</h2>
             <div class="most-recent applications">
@@ -35,6 +35,52 @@
           <div class="most-recent interviews">
           </div>
         </div>  
-      </div>    
+      </div> 
+
+      <div class="sign-up-main hidden">
+      	<div class="row ">
+      		<div class=" sign-up col-6">
+      			<h2 class="centered-text">For the Hunt! Find your dream job today</h2>
+      			<div class="entire-form-container">
+      				<div class="sign-up-parent">
+      					<p>placeholder for future image</p>
+      				</div>	
+      				<form class="sign-up-parent" aria-live="assertive">
+      					<h2 class="centered-text">Sign Up Now!</h2>
+      					<label class="aria-friendly-label" for="first-name">First Name</label>
+      					<input class="sign-up-child" type="text" id="first-name" placeholder="First Name" maxlength="30">
+      					<label class="aria-friendly-label" for="last-name">Last Name</label>
+      					<input class="sign-up-child" type="text" id="last-name" placeholder="Last Name" maxlength="30">
+      					<label class="aria-friendly-label" for="email">Email</label>
+      					<input class="sign-up-child" type="text" id="email" placeholder="Email" maxlength="30">
+      					<label class="aria-friendly-label" for="username">Username</label>
+      					<input class="sign-up-child" type="text" id="username" placeholder="Username" maxlength="30">
+      					<label class="aria-friendly-label" for="password">Password</label>
+      					<input class="sign-up-child" type="text" id="password" placeholder="Password" maxlength="30">
+      					<button type="submit" class="sign-up-submit">Submit</button>
+      				</form>
+      		</div>
+      		</div>
+      	</div>	
+      </div>
+
+      <div class="login-main hidden">
+      	<div class="row">
+      		<div class="login col-4">
+      			<h2>Login</h2>
+      			<form class=login-parent aria-live="assertive">
+      				<label class="aria-friendly-label" for="username">Username</label>
+      				<input class="login-child" type="text" id="username" placeholder="Username" maxlength="30">
+      				<label class="aria-friendly-label" for="password">Password</label>
+      				<input class="login-child" type="text" id="password" placeholder="Password" maxlength="30">
+      				<button type="submit" class="login-submit">Login</button>
+      			</form>
+      		</div>
+      	</div>	
+      </div>
+
+      
+
+     </main>   
   </body>
 </html>

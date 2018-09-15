@@ -35,3 +35,59 @@ body {
   border: solid black 1px;
   height: 100%
 }
+
+.hidden{
+  display: none;
+}
+
+.sign-up{
+  margin-top: 100px;
+  height: 500px;
+}
+
+.login {
+  margin-top: 100px;
+  height: 500px;
+  border: 1px solid black;
+}
+
+
+@media only screen and (min-width: 700px) {
+  .sign-up {
+     margin-left: 25%;
+     margin-right: 25%;
+  }
+
+  .login {
+    margin-left: 33%;
+    margin-right: 33%;
+  }
+}
+.aria-friendly-label {
+  display: none;
+}
+
+.sign-up-parent {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.sign-up-child {
+  flex: 1;
+  margin-top: 10px;
+}
+
+.login-parent {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-child {
+  flex: 1;
+  margin-bottom: 10px;
+}
+
+.entire-form-container {
+  display: flex;
+}
