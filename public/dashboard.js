@@ -17,13 +17,25 @@
   }
 
   function displayUserApplications() {
-    console.log(user.applications[0].date.toString());
     let applications = "";
     for (let i = 0; i < user.applications.length; i++){
-      applications += `<p>You applied to ${user.applications[i].name} on  
-      ${user.applications[i].date.toLocaleString()} for the position of ${user.applications[i].role}</p>`;
+      applications += createApplicationObject(user.applications[i]);
     }
-    $('.applications').append(applications);
+    $('.application-box').append(applications);
+  }
+
+  function createApplicationObject(application) {
+      return `<div class= "application-container">
+                  <div class="application-item">
+                      <span>${application.name}&nbsp;&nbsp;&nbsp;&nbsp;${application.role}</span>
+                      <span>${application.date}</span>
+                  </div>
+                  <div class= "application-buttons">
+                      <button class= "edit-button">Edit</button>
+                      <button class= "delete-button">Delete</button>
+                  </div>
+                  </div>`
+
   }
 
 

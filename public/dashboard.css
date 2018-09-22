@@ -62,6 +62,11 @@ body {
     margin-left: 33%;
     margin-right: 33%;
   }
+
+  .application-box {
+    margin-left: 25%;
+    margin-right: 25%;
+  }
 }
 .aria-friendly-label {
   display: none;
@@ -91,3 +96,45 @@ body {
 .entire-form-container {
   display: flex;
 }
+
+.application-box {
+  margin-top: 100px;
+  height: 500px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.application-container {
+  display: flex;
+  flex: 1;
+
+}
+
+.application-item {
+  flex: 1;
+}
+
+.application-buttons {
+  flex: 1;
+}
+
+.application-header {
+  flex: 1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
