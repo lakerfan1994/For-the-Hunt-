@@ -54,8 +54,13 @@
   function createApplicationObject(application) {
       return `<div class= "application-container centered-text">
                   <div class="application-item">
-                      <span>${application.name}&nbsp;&nbsp;&nbsp;&nbsp;${application.role}</span>
-                      <span>${application.date.toDateString()}</span>
+                      <span>${application.name}</span>
+                  </div>
+                  <div class="application-item">
+                    <span>${application.role}</span>
+                  </div>
+                  <div class="application-item">
+                    <span>${application.date.toDateString()}</span>
                   </div>
                   <div class= "application-buttons">
                       <button class= "edit-button">Edit</button>
