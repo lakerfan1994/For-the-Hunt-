@@ -62,9 +62,11 @@
                   <div class="application-item">
                     <span>${application.date.toDateString()}</span>
                   </div>
-                  <div class= "application-buttons">
-                      <button class= "edit-button">Edit</button>
-                      <button class= "delete-button">Delete</button>
+                  <div class= "application-button">
+                      <i class="fas fa-marker"></i>
+                  </div>
+                  <div class= "application-button">
+                    <i class="fas fa-minus-circle"></i>
                   </div>
             </div>`
 

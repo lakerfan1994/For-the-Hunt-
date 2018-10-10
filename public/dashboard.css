@@ -129,19 +129,32 @@ body {
 .application-container {
   display: flex;
   flex: 1;
+  align-items: center;
 
 }
 
 .application-item {
-  flex: 1;
+  flex: 2;
 }
 
-.application-buttons {
+.application-button {
   flex: 1;
+  justify-content: center;
 }
 
 .application-header {
   flex: 1;
+}
+
+.list-legend {
+}
+
+.fa-marker, .fa-minus-circle {
+  font-size: 20px;
+}
+
+.fa-edit, .fa-trash-alt {
+  font-size: 35px;
 }
 
 
