@@ -17,9 +17,9 @@
     <nav role="navigation">
       <div class="nav-container">
         <div class="nav-button"><p class="centered-text">Applications   <i class="fas fa-folder"></i></p> </div>
-        <div class="nav-button"><p class="centered-text">Interviews   <i class="fas fa-briefcase"></i></p></div>
-        <div class="nav-button"><p class="centered-text">Meetups<<i class="fas fa-user-friends"></i>></p> </div>
-        <div class="nav-button"><p class="centered-text">Character<i class="fas fa-medal"></i></p></div>
+        <div class="nav-button"><p class="centered-text">Events   <i class="fas fa-user-friends"></i></p></div>
+        <div class="nav-button"><p class="centered-text">Character<<i class="fas fa-medal"></i>></p> </div>
+        <div class="nav-button"><p class="centered-text">Homepage<i class="fas fa-home"></i></p></div>
       </div>
     </nav>
     <main>
@@ -87,6 +87,32 @@
       	</div>	
       </div>
 
+
+      <div class="application-overlay "></div>
+      <div class= "application-modal col-6 ">
+       <i class="application-exit fas fa-sign-out-alt"></i>
+       <div class="new-application">
+        <form class= new-application-form aria-live= "assertive">
+          <label class= "aria-friendly-label" for="company">Name of Company ex. Google</label>
+          <input class= "new-application-form-input" type="text" id="company" placeholder="Name of Company, ex. Google">
+          <label class= "aria-friendly-label" for="role">Position applied for ex. Junior Developer</label>
+          <input class= "new-application-form-input" type= "text" id= "role" placeholder="Position applied for ex. Junior Developer">
+          <label class= "aria-friendly-label" for="location">Location ex. San Francisco</label>
+          <input class= "new-application-form-input" type= "text" id= "location" placeholder="Location ex. San Franscisco">
+          <label  for="interview">Check if you have an interview with company</label>
+          <input class= "new-application-form-input" type= "checkbox" id= "interview" placeholder="Check if you have an interview with company">
+        </form>
+        <div class="submit-and-quotes">
+          <div class="character-portrait col-3">
+              <img class="current-avatar centered-text" src="https://i.kym-cdn.com/photos/images/newsfeed/000/988/052/2ab.gif">
+              <span class="interesting-qoute"></span>
+          </div> 
+          <div class="application-submit-button-container">
+              <button type="submit" class="application-submit-button">Submit</button> 
+          </div>  
+        </div>
+       </div>   
+      </div> 
       <div class="application">
       	<div class="row">
           <div class="character-portrait col-3">
@@ -96,14 +122,15 @@
           </div>
       		<div class="col-6 application-box">
       			<h2 class="centered-text application-header">List of Applications</h2>
+            <button class= "col-6 create-application">Create a new application</button>
             <div class= "application-container centered-text">
                   <div class="application-item">
                       <h2>Company</h2>
                   </div>
-                  <div class="application-item">
+                  <div class="application-item not-on-small-screens">
                     <h2>Role</h2>
                   </div>
-                  <div class="application-item not-on-small">
+                  <div class="application-item">
                     <h2>Date Applied</h2>
                   </div>
                   <div class= "application-button">

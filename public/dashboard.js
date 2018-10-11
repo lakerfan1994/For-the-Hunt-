@@ -43,6 +43,9 @@
    ]
   }
 
+  const inspiringSayings = ["Ambition is a dream with a V8 engine - Elvis Presley", "Nothing can dim the light which shines from within" + 
+  " - Maya Angelou", "The opposite of bravery is not cowardice but conformity -Robert Anthony"];
+
   function displayUserApplications() {
     let applications = "";
     for (let i = 0; i < user.applications.length; i++){
@@ -56,7 +59,7 @@
                   <div class="application-item">
                       <span>${application.name}</span>
                   </div>
-                  <div class="application-item">
+                  <div class="application-item not-on-small-screens">
                     <span>${application.role}</span>
                   </div>
                   <div class="application-item">

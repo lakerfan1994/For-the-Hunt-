@@ -3,7 +3,7 @@
 .nav-container {
   display: flex;
   width: 100%;
-  background-color: aqua
+  background-color: lightblue
 }
 
 body {
@@ -42,6 +42,11 @@ body {
   height: 100%
 }
 
+.fa-edit, .fa-trash-alt {
+  font-size: 25px;
+}
+
+
 .hidden{
   display: none;
 }
@@ -63,6 +68,10 @@ body {
   margin-left: 40%;
 }
 
+ .not-on-small-screens {
+    display: none;
+  }
+
 
 @media only screen and (min-width: 700px) {
   .sign-up {
@@ -82,12 +91,32 @@ body {
 
   .character-portrait {
     margin-left: 36.5%;
-    margin-right: 37.5%;
+    margin-right: 36.5%;
   }
 
   .most-recent-main-container {
     flex-direction: row;
   }
+
+   .not-on-small-screens {
+    display: block;
+  }
+
+  .fa-edit, .fa-trash-alt {
+  font-size: 25px;
+  }
+
+  .create-application {
+    margin-left: 25%;
+  }
+
+  .application-modal {
+    margin-left: 25%;
+    margin-right: 25%;
+  }  
+
+
+
 }
 .aria-friendly-label {
   display: none;
@@ -126,6 +155,40 @@ body {
   flex-direction: column;
 }
 
+html, body {
+    margin: 0;
+    min-height: 100%;
+}
+
+body {
+    position: relative; /* needed for the overlay to extend when you scroll */
+    /* general styles */
+    font-family: 'Open Sans', sans-serif;
+    background: darkgrey;
+    color: whitesmoke;
+}
+
+.application-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 10;
+}
+
+.application-modal {
+
+    height: 500px;
+    position: fixed;
+    margin-top: 100px;
+    background-color: #f1c40f;
+    border-radius: 10px;
+    text-align: center;
+    z-index: 11; 
+}
+
 .application-container {
   display: flex;
   flex: 1;
@@ -153,9 +216,21 @@ body {
   font-size: 20px;
 }
 
-.fa-edit, .fa-trash-alt {
-  font-size: 35px;
+.application-exit {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
+
+.new-application {
+  display: flex;
+}
+
+.new-application-form {
+  display: flex;
+  flex-direction: column;
+}
+
 
 
 
