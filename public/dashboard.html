@@ -88,32 +88,36 @@
       </div>
 
 
-      <div class="application-overlay "></div>
-      <div class= "application-modal col-6 ">
-       <i class="application-exit fas fa-sign-out-alt"></i>
+      <div class="application-overlay hidden "></div>
+      <div class= "application-modal col-6 hidden ">
+       <p class="application-exit">Back to list<i class="fas fa-sign-out-alt"></i></p>
        <div class="new-application">
         <form class= new-application-form aria-live= "assertive">
+          <header class="new-application-header">New Application</header>
           <label class= "aria-friendly-label" for="company">Name of Company ex. Google</label>
           <input class= "new-application-form-input" type="text" id="company" placeholder="Name of Company, ex. Google">
-          <label class= "aria-friendly-label" for="role">Position applied for ex. Junior Developer</label>
-          <input class= "new-application-form-input" type= "text" id= "role" placeholder="Position applied for ex. Junior Developer">
+          <label class= "aria-friendly-label" for="role">Position applied for ex. Developer</label>
+          <input class= "new-application-form-input" type= "text" id= "role" placeholder="Position applied for ex. Developer">
           <label class= "aria-friendly-label" for="location">Location ex. San Francisco</label>
           <input class= "new-application-form-input" type= "text" id= "location" placeholder="Location ex. San Franscisco">
-          <label  for="interview">Check if you have an interview with company</label>
-          <input class= "new-application-form-input" type= "checkbox" id= "interview" placeholder="Check if you have an interview with company">
+          <label class="new-application-form-input align-self-center"  for="interview"><span class="input-checkbox">Check if you have an interview</span>
+            <input type= "checkbox" id= "interview" placeholder="Check if you have an interview with company">
+          </label>
         </form>
         <div class="submit-and-quotes">
-          <div class="character-portrait col-3">
-              <img class="current-avatar centered-text" src="https://i.kym-cdn.com/photos/images/newsfeed/000/988/052/2ab.gif">
-              <span class="interesting-qoute"></span>
-          </div> 
+          <div class="application-character-portrait">
+            <div class="character-portrait col-3">
+                <img class="current-avatar centered-text" src="https://i.kym-cdn.com/photos/images/newsfeed/000/988/052/2ab.gif">
+                <span class="interesting-qoute"></span>
+            </div> 
+          </div>
           <div class="application-submit-button-container">
-              <button type="submit" class="application-submit-button">Submit</button> 
+              <button type="submit" class="application-submit-button"><p>Submit</p></button> 
           </div>  
         </div>
        </div>   
       </div> 
-      <div class="application">
+      <div class="application hidden">
       	<div class="row">
           <div class="character-portrait col-3">
             <h2 class=" centered-text">Level 3 Job Hunter</h2>
@@ -143,6 +147,16 @@
       		</div>
       	</div>	
       </div>
+
+      <div class="events-and-interviews">
+        <div class="row">
+          <div class="character-portrait col-3">
+            <h2 class=" centered-text">Level 3 Job Hunter</h2>
+            <img class="current-avatar centered-text" src="https://i.kym-cdn.com/photos/images/newsfeed/000/988/052/2ab.gif">
+          </div>
+        </div>
+      </div>
+      
 
       
 

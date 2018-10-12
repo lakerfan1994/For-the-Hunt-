@@ -72,6 +72,13 @@ body {
     display: none;
   }
 
+@media only screen and (max-width: 700px) {
+  .application-modal {
+    top: 0;
+    left: 0;
+  }
+}  
+
 
 @media only screen and (min-width: 700px) {
   .sign-up {
@@ -113,6 +120,7 @@ body {
   .application-modal {
     margin-left: 25%;
     margin-right: 25%;
+    margin-top: 100px;
   }  
 
 
@@ -180,9 +188,8 @@ body {
 
 .application-modal {
 
-    height: 500px;
+    height: 350px;
     position: fixed;
-    margin-top: 100px;
     background-color: #f1c40f;
     border-radius: 10px;
     text-align: center;
@@ -198,6 +205,10 @@ body {
 
 .application-item {
   flex: 2;
+}
+
+.application-item h2 {
+  font-size: 22px;
 }
 
 .application-button {
@@ -218,8 +229,11 @@ body {
 
 .application-exit {
   position: absolute;
-  top: 0;
+  bottom: 0;
   right: 0;
+  padding: 8px;
+  font-size: 20px;
+  margin: 0;
 }
 
 .new-application {
@@ -227,11 +241,70 @@ body {
 }
 
 .new-application-form {
+  flex: 1;
   display: flex;
   flex-direction: column;
 }
 
+.new-application-header {
+  padding-top: 25px;
+  font-size: 25px;
+  margin-bottom: 25px;
+}
+.new-application-form-input{
+  margin-bottom:25px;
+  height: 25px;
+  border-radius: 10px;
+}
 
+.align-self-center {
+  align-self: center;
+}
+
+input[type='checkbox'] {
+    -webkit-appearance:none;
+    width:30px;
+    height:30px;
+    background:white;
+    border-radius:5px;
+    border:2px solid #555;
+}
+
+input[type='checkbox']:checked {
+    background: #abd; 
+}
+
+.input-checkbox {
+  font-size: 17px;
+}
+
+.submit-and-quotes {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  j
+}
+
+.application-character-portrait {
+  flex: 1;
+  padding-top: 10px;
+  
+}
+
+.application-submit-button-container {
+  flex: 1;  
+}
+
+.application-submit-button {
+  width: 75%;
+  height: 85%;
+  margin: 0 auto;
+  border-radius: 10px;
+}
+
+.application-submit-button p {
+  font-size: 20px;
+}
 
 
 
