@@ -16,15 +16,15 @@
   <body>
     <nav role="navigation">
       <div class="nav-container">
-        <div class="nav-button"><p class="centered-text">Applications   <i class="fas fa-folder"></i></p> </div>
-        <div class="nav-button"><p class="centered-text">Events   <i class="fas fa-user-friends"></i></p></div>
-        <div class="nav-button"><p class="centered-text">Character<<i class="fas fa-medal"></i>></p> </div>
-        <div class="nav-button"><p class="centered-text">Homepage<i class="fas fa-home"></i></p></div>
+        <div class="nav-button nav-applications"><a href="#"><p class="centered-text">Applications   <i class="fas fa-folder"></i></p></a></div>
+        <div class="nav-button nav-events"><a href="#"><p class="centered-text">Events   <i class="fas fa-user-friends"></i></p></a></div>
+        <div class="nav-button nav-character"><a href="#"><p class="centered-text">Character<i class="fas fa-medal"></i></p> </a></div>
+        <div class="nav-button nav-homepage"><a href="#"><p class="centered-text">Homepage<i class="fas fa-home"></i></p></a></div>
       </div>
     </nav>
     <main>
 
-      <div class="dashboard hidden">
+      <div class="dashboard ">
         <div class="row">
           <div class="character-portrait col-3">
             <h2 class=" centered-text">Level 3 Job Hunter</h2>
@@ -88,9 +88,9 @@
       </div>
 
 
-      <div class="application-overlay hidden "></div>
+      <div class="application-overlay hidden  "></div>
       <div class= "application-modal col-6 hidden ">
-       <p class="application-exit">Back to list<i class="fas fa-sign-out-alt"></i></p>
+       <a href="#"><p class="application-exit">Back to list   <i class="fas fa-sign-out-alt"></i></p></a>
        <div class="new-application">
         <form class= new-application-form aria-live= "assertive">
           <header class="new-application-header">New Application</header>
@@ -100,9 +100,13 @@
           <input class= "new-application-form-input" type= "text" id= "role" placeholder="Position applied for ex. Developer">
           <label class= "aria-friendly-label" for="location">Location ex. San Francisco</label>
           <input class= "new-application-form-input" type= "text" id= "location" placeholder="Location ex. San Franscisco">
-          <label class="new-application-form-input align-self-center"  for="interview"><span class="input-checkbox">Check if you have an interview</span>
-            <input type= "checkbox" id= "interview" placeholder="Check if you have an interview with company">
+          <label class="new-application-form-input align-self-center"  for="interview"><span class="input-checkbox">Do you have an interview?</span>
+            <input type= "checkbox" id= "interview" placeholder="Do you have an interview?">
           </label>
+          <div class="new-application-form-input"> 
+             <label class= "new-application-form-input" for="interviewDate"><span class=" input-checkbox">If yes, when is the interview?</span></label>
+             <input class="parent-width" type= "date" id= "interviewDate"> 
+          </div>   
         </form>
         <div class="submit-and-quotes">
           <div class="application-character-portrait">
@@ -117,12 +121,13 @@
         </div>
        </div>   
       </div> 
+
+
       <div class="application hidden">
       	<div class="row">
           <div class="character-portrait col-3">
             <h2 class=" centered-text">Level 3 Job Hunter</h2>
             <img class="current-avatar centered-text" src="https://i.kym-cdn.com/photos/images/newsfeed/000/988/052/2ab.gif">
-
           </div>
       		<div class="col-6 application-box">
       			<h2 class="centered-text application-header">List of Applications</h2>
@@ -148,15 +153,123 @@
       	</div>	
       </div>
 
-      <div class="events-and-interviews">
+      <div class="events-and-interviews hidden">
         <div class="row">
           <div class="character-portrait col-3">
             <h2 class=" centered-text">Level 3 Job Hunter</h2>
             <img class="current-avatar centered-text" src="https://i.kym-cdn.com/photos/images/newsfeed/000/988/052/2ab.gif">
           </div>
+            <div class="col-6 event-box">
+               <h2 class="centered-text event-header">List of Events</h2>
+               <button class= "col-6 create-event">Create a new event</button>
+               <div class= "event-container centered-text">
+                  <div class="event-item">
+                      <h2>Event</h2>
+                  </div>
+                  <div class="event-item not-on-small-screens">
+                    <h2>Type</h2>
+                  </div>
+                  <div class="event-item">
+                    <h2>Date</h2>
+                  </div>
+                  <div class= "event-button">
+                    <i class="fas fa-edit list-legend"></i>
+                  </div>
+                  <div class= " event-button">
+                    <i class="fas fa-trash-alt list-legend"></i>
+                  </div> 
+            </div>`
+          </div>
         </div>
       </div>
+
+    <div class="event-overlay hidden "></div>
+      <div class= "event-modal hidden col-6">
+       <a href="#"><p class="event-exit">Back to list   <i class="fas fa-sign-out-alt"></i></p></a>
+       <div class="new-event">
+        <form class= new-event-form aria-live= "assertive">
+          <header class="new-event-header">New Meetup</header>
+          <label class= "aria-friendly-label" for="meetup">Name of Meetup</label>
+          <input class= "new-event-form-input" type="text" id="meetup" placeholder="Name of Meetup">
+           <div class="new-event-form-input"> 
+             <label class= "new-event-form-input" for="eventDate"><span class=" input-checkbox">Date of Event</span></label>
+             <input class="parent-width" type= "date" id= "eventDate"> 
+          </div>  
+          <label class= "aria-friendly-label" for="location">Location ex. San Francisco</label>
+          <input class= "new-event-form-input" type= "text" id= "location" placeholder="Location ex. San Franscisco">
+        </form>
+        <div class="submit-and-quotes">
+          <div class="event-character-portrait">
+            <div class="character-portrait col-3">
+                <img class="current-avatar centered-text" src="https://i.kym-cdn.com/photos/images/newsfeed/000/988/052/2ab.gif">
+                <span class="interesting-qoute"></span>
+            </div> 
+          </div>
+          <div class="event-submit-button-container">
+              <button type="submit" class="event-submit-button"><p>Submit</p></button> 
+          </div>  
+        </div>
+       </div>   
+      </div> 
+
+      <div class= "character-status hidden">
+        <div class="character-portrait col-3">
+          <h2 class=" centered-text">Level 3 Job Hunter</h2>
+          <img class="current-avatar centered-text" src="https://i.kym-cdn.com/photos/images/newsfeed/000/988/052/2ab.gif">
+          <div class="level-up">
+              <span class= "centered-text block"><span class="jobs-needed"></span>needed to level up</span>
+          </div>
+
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       
+
+
+
+
+
+
+
+
+
+
 
       
 

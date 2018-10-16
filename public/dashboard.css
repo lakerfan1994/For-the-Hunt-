@@ -14,6 +14,15 @@ body {
   flex: 1;
 }
 
+.parent-width {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.block {
+  display: block;
+}
+
 .centered-text{
   text-align: center;
 }
@@ -73,7 +82,7 @@ body {
   }
 
 @media only screen and (max-width: 700px) {
-  .application-modal {
+  .application-modal, .event-modal {
     top: 0;
     left: 0;
   }
@@ -96,6 +105,11 @@ body {
     margin-right: 25%;
   }
 
+  .event-box {
+    margin-left: 25%;
+    margin-right: 25%;
+  }
+
   .character-portrait {
     margin-left: 36.5%;
     margin-right: 36.5%;
@@ -113,11 +127,11 @@ body {
   font-size: 25px;
   }
 
-  .create-application {
+  .create-application, .create-event {
     margin-left: 25%;
   }
 
-  .application-modal {
+  .application-modal, .event-modal {
     margin-left: 25%;
     margin-right: 25%;
     margin-top: 100px;
@@ -155,13 +169,15 @@ body {
   display: flex;
 }
 
-.application-box {
+.application-box, .event-box {
   margin-top: 100px;
   height: 500px;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
 }
+
+
 
 html, body {
     margin: 0;
@@ -176,7 +192,7 @@ body {
     color: whitesmoke;
 }
 
-.application-overlay {
+.application-overlay, .event-overlay{
     position: absolute;
     top: 0;
     left: 0;
@@ -186,9 +202,9 @@ body {
     z-index: 10;
 }
 
-.application-modal {
+.application-modal, .event-modal {
 
-    height: 350px;
+    height: 500px;
     position: fixed;
     background-color: #f1c40f;
     border-radius: 10px;
@@ -196,27 +212,27 @@ body {
     z-index: 11; 
 }
 
-.application-container {
+.application-container, .event-container {
   display: flex;
   flex: 1;
   align-items: center;
 
 }
 
-.application-item {
+.application-item, .event-item {
   flex: 2;
 }
 
-.application-item h2 {
+.application-item h2, .event-item h2 {
   font-size: 22px;
 }
 
-.application-button {
+.application-button, .event-button {
   flex: 1;
   justify-content: center;
 }
 
-.application-header {
+.application-header, .event-button {
   flex: 1;
 }
 
@@ -227,7 +243,7 @@ body {
   font-size: 20px;
 }
 
-.application-exit {
+.application-exit, .event-exit {
   position: absolute;
   bottom: 0;
   right: 0;
@@ -236,25 +252,28 @@ body {
   margin: 0;
 }
 
-.new-application {
+.new-application, .new-event {
   display: flex;
+  width: 100%;
+  height: 90%;
 }
 
-.new-application-form {
+.new-application-form, .new-event-form {
   flex: 1;
   display: flex;
   flex-direction: column;
 }
 
-.new-application-header {
+.new-application-header, .new-event-header {
   padding-top: 25px;
   font-size: 25px;
   margin-bottom: 25px;
+  flex: 1;
 }
-.new-application-form-input{
-  margin-bottom:25px;
-  height: 25px;
+.new-application-form-input, .new-event-form-input{
+  margin-bottom:40px;
   border-radius: 10px;
+  flex: 1;
 }
 
 .align-self-center {
@@ -262,7 +281,6 @@ body {
 }
 
 input[type='checkbox'] {
-    -webkit-appearance:none;
     width:30px;
     height:30px;
     background:white;
@@ -274,8 +292,9 @@ input[type='checkbox']:checked {
     background: #abd; 
 }
 
+
 .input-checkbox {
-  font-size: 17px;
+  font-size: 20px;
 }
 
 .submit-and-quotes {
@@ -285,24 +304,24 @@ input[type='checkbox']:checked {
   j
 }
 
-.application-character-portrait {
+.application-character-portrait, .event-character-portrait {
   flex: 1;
   padding-top: 10px;
   
 }
 
-.application-submit-button-container {
+.application-submit-button-container, .event-submit-button-container {
   flex: 1;  
 }
 
-.application-submit-button {
+.application-submit-button, .event-submit-button {
   width: 75%;
   height: 85%;
   margin: 0 auto;
   border-radius: 10px;
 }
 
-.application-submit-button p {
+.application-submit-button p, .event-submit-button p {
   font-size: 20px;
 }
 

@@ -3,6 +3,8 @@ const app = express();
 const morgan = require('morgan')
 
 app.use(express.static('public'));
+app.use(morgan('common'));
+
 
 
 
