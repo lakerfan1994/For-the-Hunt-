@@ -188,7 +188,7 @@
   }
 
   function closeEventOverlay() {
-    $('.event-modal').on('cllck', '.event-exit', function(){
+    $('.event-modal').on('click', '.event-exit', function(){
       $('.event-overlay').addClass('hidden');
       $('.event-modal').addClass('hidden');
     })
