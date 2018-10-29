@@ -6,6 +6,8 @@ const {DATABASE_URL, PORT} = require('./config');
 const router = require('./user-router');
 const authRouter = require('./auth-router');
 const applicationRouter = require('./application.router');
+const eventRouter = require('./event-router');
+
 
 
 
@@ -13,8 +15,9 @@ app.use(express.static('public'));
 app.use(morgan('common'));
 mongoose.Promise = global.Promise;
 app.use('/user', router);
-app.use('/auth', authRouter);
-app.use('/applications', applicationRouter)
+app.use('/login', authRouter);
+app.use('/applications', applicationRouter);
+app.use('/events', eventRouter);
 
 
 

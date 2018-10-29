@@ -49,7 +49,7 @@ router.post('/', jsonParser, (req, res) => {
       message: 'Cannot start or end with whitespace',
       location: nonTrimmedField
     });
-  }
+  } 
 
   const sizedFields = {
     username: {

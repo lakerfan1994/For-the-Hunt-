@@ -11,14 +11,14 @@ const userSchema = mongoose.Schema({
  });
 
 const applicationSchema = mongoose.Schema({
-	name: {type: String, required: true, unique: true},
+	name: {type: String, required: true},
 	date: {type: Date, required: true},
 	role: {type: String, required: true},
-	user: {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: false},
+	user: {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true},
 	location: {type: String, required: true},
 	interviewExistence: {type: Boolean, required: true},
 	eventType: {type: String, required: true},
-	dateOfEvent: {type: Date, required: true},
+	dateOfEvent: {type: Date, required: false},
 	interviewQuestions: {type: String, required: false}
 });
 
@@ -42,6 +42,7 @@ applicationSchema.pre('find', function(next){
 
  applicationSchema.pre('save', function(next){
   this.populate('user');
+  next();
 });
 
  meetupSchema.pre('find', function(next){
@@ -56,6 +57,7 @@ applicationSchema.pre('find', function(next){
 
  meetupSchema.pre('save', function(next){
   this.populate('user');
+  next();
 });
 
 
@@ -67,6 +69,7 @@ userSchema.methods.serialize = function() {
 
 applicationSchema.methods.serialize = function() {
 	return {
+		id: this._id,
 		name: this.name,
 		date: this.date,
 		role: this.role,
@@ -80,6 +83,7 @@ applicationSchema.methods.serialize = function() {
 
 meetupSchema.methods.serialize = function() {
 	return {
+		id: this._id,
 		name: this.name,
 		dateOfEvent: this.dateOfEvent,
 		location: this.location,

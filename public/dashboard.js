@@ -1,4 +1,8 @@
-  const user = {
+ const applicationsUrl = "/applications";
+ const meetupUrl = "/events";
+ const userUrl = "/user";
+ const loginUrl = "/login";
+ const user = {
     username: "Sally Smith",
     password: "password",
     applications: [
@@ -53,12 +57,136 @@
   const inspiringSayings = ["Ambition is a dream with a V8 engine - Elvis Presley", "Nothing can dim the light which shines from within" + 
   " - Maya Angelou", "The opposite of bravery is not cowardice but conformity -Robert Anthony"];
 
-
-  function displayUserApplications() {
-    let applications = "";
-    for (let i = 0; i < user.applications.length; i++){
-      applications += createApplicationObject(user.applications[i]);
+  function addUserToDatabase(user) {
+    const params = {
+      method: 'POST',
+      contentType: 'application/json',
+      url: userUrl,
+      data: JSON.stringify(user),
+      error: brokenCode,
+      success: confirmUser
     }
+    $.ajax(params);
+  }
+
+  function loginUserInDatabase(user) {
+    const params = {
+      method: 'POST',
+      contentType: 'application/json',
+      url: loginUrl,
+      data: JSON.stringify(user),
+      error: brokenCode,
+      success: loginSuccess
+    }
+
+    $.ajax(params);
+    
+  }
+
+  function createNewApplicationInDatabase(app) {
+    const params = {
+      method: 'POST',
+      contentType: 'application/json',
+      url: applicationsUrl,
+      data: JSON.stringify(app),
+      error: brokenCode,
+      success: cleanCode   
+    }
+
+    $.ajax(params);
+  }
+
+  function getApplicationData(_username, _sort) {
+    const params = {
+      method: 'GET',
+      url: `${applicationsUrl}/${_username}/${_sort}`,
+      success: displayUserApplications,
+      error: brokenCode
+    }
+
+    $.ajax(params);
+  }
+
+  function submitSignupForm() {
+    $('.sign-up-parent').submit(function(event) {
+      event.preventDefault();
+      let _username = $('#signup-username').val();
+      _username = _username.trim(); 
+      let _password = $('#signup-password').val();
+      _password = _password.trim();
+      if(_password.length < 10 || _password.length > 72) {
+        $('.password-validation').removeClass('hidden');
+        $('#signup-password').val('');
+      }
+
+      const newUser = {username: _username, password: _password};
+      addUserToDatabase(newUser);
+    })
+  }
+
+  function loginFromLoginPage() {
+    $('.login-parent').submit(function(event) {
+      event.preventDefault();
+      let _username = $('.login-username').val().trim();
+      let _password = $('.login-password').val().trim();
+      const userLogin = {username: _username, password: _password};
+      loginUserInDatabase(userLogin);
+
+    }) 
+  }
+
+
+  function loginSuccess(data) {
+    let jwtToken = data.authToken
+    localStorage.setItem("authToken", jwtToken);
+    emptyApp();
+    $('.current-user').val('');
+    $('.current-user').append(`<p>${data.username}</p>`);
+    $('.dashboard').removeClass('hidden');
+    $('.nav-container').removeClass('hidden');
+
+  }
+
+  function confirmUser() {
+    $('.user-confirm').removeClass('hidden');
+  }
+
+
+  function brokenCode(data) {
+    console.log(`oh no!! it broke`);
+  }
+
+  function cleanCode(data) {
+    console.log('yiss, shit worked!');
+    console.log(data);
+  }
+
+
+  function submitNewApplication(){
+    $('.new-application-form').submit(function(event){
+      event.preventDefault();
+      let _name = $('#application-company').val().trim();
+      let _date = new Date();
+      let _role = $('#application-role').val().trim();
+      let _location = $('#application-location').val().trim();
+      let _username = $('.current-user').text().trim();
+      let _interviewExistence = false;
+      let _eventType = 'Application';
+
+      let newApplication = {name: _name, date: _date, role: _role, location: _location, username: _username,
+        interviewExistence: _interviewExistence, eventType: _eventType};
+
+      createNewApplicationInDatabase/(newApplication);
+
+
+    })
+  }
+
+
+
+
+  function displayUserApplications(data) {
+    let applications = data.map(app => createApplicationObject(app));
     $('.application-box').append(applications);
   }
 
@@ -71,13 +199,13 @@
                     <span>${application.role}</span>
                   </div>
                   <div class="application-item">
-                    <span>${application.date.toDateString()}</span>
+                    <span>${new Date(application.date).toDateString()}</span>
                   </div>
                   <div class= "application-button">
-                      <i class="fas fa-marker"></i>
+                      <a href="#"><i class="fas fa-marker"></i></a>
                   </div>
                   <div class= "application-button">
-                    <i class="fas fa-minus-circle"></i>
+                    <a href="#"><i class="fas fa-minus-circle"></i></a>
                   </div>
             </div>`
 
@@ -129,18 +257,47 @@
 
 
   function emptyApp() {
+    $('.homepage').addClass('hidden');
     $('.dashboard').addClass('hidden');
     $('.sign-up-main').addClass('hidden');
     $('.login-main').addClass('hidden');
     $('.application').addClass('hidden');
     $('.events-and-interviews').addClass('hidden');
     $('.character-status').addClass('hidden');
+    $('.password-validation').addClass('hidden');
+    $('.user-confirm').addClass('hidden');
+  }
+
+  function moveToHomepage() {
+    $('.user-confirm').on('click', '.user-confirm-button', function(){
+      let _username = $('#signup-username').val().trim();
+      let _password = $('#signup-password').val().trim();
+      let user = {username: _username, password: _password};
+      loginUserInDatabase(user);
+    })
+  }
+
+  function moveToSignUp() {
+    $('.homepage-navbar').on('click', '.homepage-signup', function(){
+      emptyApp();
+      $('.sign-up-main').removeClass('hidden');
+    })
+  }
+
+  function moveToLogin() {
+    $('.homepage-navbar').on('click', '.homepage-login', function(){
+      emptyApp();
+      $('.login-main').removeClass('hidden');
+    })
   }
 
 
   function moveToApplicationList() {
     $('.nav-container').on('click', '.nav-applications', function(){
       emptyApp();
+      let _username = $('.current-user').text().trim();
+      getApplicationData(_username, "date");
+      //When you come back, work on creating the callback function for the get app info
       $('.application').removeClass('hidden');
     })
   }
@@ -159,7 +316,7 @@
     })
   }
 
-  function moveToHomepage(){
+  function moveToDashboard(){
     $('.nav-container').on('click', '.nav-homepage', function(){
       emptyApp();
       $('.dashboard').removeClass('hidden');
@@ -208,4 +365,10 @@
   $(closeApplicationOverlay);
   $(openEventOverlay);
   $(closeEventOverlay);
+  $(submitSignupForm);
+  $(moveToDashboard);
+  $(moveToSignUp);
+  $(moveToLogin);
+  $(loginFromLoginPage);
+  $(submitNewApplication);
 

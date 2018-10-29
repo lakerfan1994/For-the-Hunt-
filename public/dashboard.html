@@ -14,17 +14,38 @@
    <script src="dashboard.js"></script>
   </head>
   <body>
+
+    <div class="current-user">
+    </div>
+
+    <div class="homepage">
+      <div class="homepage-navbar">
+        <div class="balance-div">
+        </div>
+        <div class="homepage-signup">
+          <a href="#"><h3 class="centered-text">Sign Up</h3></a>
+        </div>
+        <div class="homepage-login">
+          <a href= "#"><h3 class="centered-text">Login</h3></a>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
     <nav role="navigation">
-      <div class="nav-container">
+      <div class="nav-container hidden">
         <div class="nav-button nav-applications"><a href="#"><p class="centered-text">Applications   <i class="fas fa-folder"></i></p></a></div>
-        <div class="nav-button nav-events"><a href="#"><p class="centered-text">Events   <i class="fas fa-user-friends"></i></p></a></div>
+        <div class="nav-button nav-events"><a href="#"><p class="centered-text">Events<i class="fas fa-user-friends"></i></p></a></div>
         <div class="nav-button nav-character"><a href="#"><p class="centered-text">Character<i class="fas fa-medal"></i></p> </a></div>
         <div class="nav-button nav-homepage"><a href="#"><p class="centered-text">Homepage<i class="fas fa-home"></i></p></a></div>
       </div>
     </nav>
     <main>
 
-      <div class="dashboard ">
+      <div class="dashboard hidden ">
         <div class="row">
           <div class="character-portrait col-3">
             <h2 class=" centered-text">Level 3 Job Hunter</h2>
@@ -45,6 +66,7 @@
        </div>   
       </div> 
 
+
       <div class="sign-up-main hidden">
       	<div class="row ">
       		<div class=" sign-up col-6">
@@ -55,19 +77,19 @@
       				</div>	
       				<form class="sign-up-parent" aria-live="assertive">
       					<h2 class="centered-text">Sign Up Now!</h2>
-      					<label class="aria-friendly-label" for="first-name">First Name</label>
-      					<input class="sign-up-child" type="text" id="first-name" placeholder="First Name" maxlength="30">
-      					<label class="aria-friendly-label" for="last-name">Last Name</label>
-      					<input class="sign-up-child" type="text" id="last-name" placeholder="Last Name" maxlength="30">
-      					<label class="aria-friendly-label" for="email">Email</label>
-      					<input class="sign-up-child" type="text" id="email" placeholder="Email" maxlength="30">
-      					<label class="aria-friendly-label" for="username">Username</label>
-      					<input class="sign-up-child" type="text" id="username" placeholder="Username" maxlength="30">
-      					<label class="aria-friendly-label" for="password">Password</label>
-      					<input class="sign-up-child" type="text" id="password" placeholder="Password" maxlength="30">
+      					<label class="aria-friendly-label" for="signup-username">Username</label>
+      					<input class="sign-up-child" type="text" id="signup-username" required placeholder="Username" maxlength="30">
+      					<label class="aria-friendly-label" for="signup-password">Password</label>
+      					<input class="sign-up-child" type="text" id="signup-password" placeholder="Password" required maxlength="30">
       					<button type="submit" class="sign-up-submit">Submit</button>
       				</form>
       		</div>
+            <div class="password-validation hidden">
+              <h4 class="centered-text">Password must be longer than 10 characters and less than 72</h4>
+            </div>
+            <div class="user-confirm centered-text hidden">
+              <button class= "user-confirm-button">User saved, press this button to login</button>
+            </div> 
       		</div>
       	</div>	
       </div>
@@ -78,9 +100,9 @@
       			<h2>Login</h2>
       			<form class=login-parent aria-live="assertive">
       				<label class="aria-friendly-label" for="username">Username</label>
-      				<input class="login-child" type="text" id="username" placeholder="Username" maxlength="30">
+      				<input class="login-child login-username" required type="text" id="username" placeholder="Username" maxlength="30">
       				<label class="aria-friendly-label" for="password">Password</label>
-      				<input class="login-child" type="text" id="password" placeholder="Password" maxlength="30">
+      				<input class="login-child login-password" required type="text" id="password" placeholder="Password" maxlength="30">
       				<button type="submit" class="login-submit">Login</button>
       			</form>
       		</div>
@@ -91,15 +113,15 @@
       <div class="application-overlay hidden  "></div>
       <div class= "application-modal col-6 hidden ">
        <a href="#"><p class="application-exit">Back to list   <i class="fas fa-sign-out-alt"></i></p></a>
-       <div class="new-application">
-        <form class= new-application-form aria-live= "assertive">
+       <form class="new-application-form" aria-live= "assertive">
+        <div class= new-application>
           <header class="new-application-header">New Application</header>
           <label class= "aria-friendly-label" for="company">Name of Company ex. Google</label>
-          <input class= "new-application-form-input" type="text" id="company" placeholder="Name of Company, ex. Google">
+          <input class= "new-application-form-input" type="text" id="application-company" placeholder="Name of Company, ex. Google">
           <label class= "aria-friendly-label" for="role">Position applied for ex. Developer</label>
-          <input class= "new-application-form-input" type= "text" id= "role" placeholder="Position applied for ex. Developer">
+          <input class= "new-application-form-input" type= "text" id= "application-role" placeholder="Position applied for ex. Developer">
           <label class= "aria-friendly-label" for="location">Location ex. San Francisco</label>
-          <input class= "new-application-form-input" type= "text" id= "location" placeholder="Location ex. San Franscisco">
+          <input class= "new-application-form-input" type= "text" id= "application-location" placeholder="Location ex. San Franscisco">
           <label class="new-application-form-input align-self-center"  for="interview"><span class="input-checkbox">Do you have an interview?</span>
             <input type= "checkbox" id= "interview" placeholder="Do you have an interview?">
           </label>
@@ -107,7 +129,7 @@
              <label class= "new-application-form-input" for="interviewDate"><span class=" input-checkbox">If yes, when is the interview?</span></label>
              <input class="parent-width" type= "date" id= "interviewDate"> 
           </div>   
-        </form>
+        </div>
         <div class="submit-and-quotes">
           <div class="application-character-portrait">
             <div class="character-portrait col-3">
@@ -119,7 +141,7 @@
               <button type="submit" class="application-submit-button"><p>Submit</p></button> 
           </div>  
         </div>
-       </div>   
+       </form>   
       </div> 
 
 
