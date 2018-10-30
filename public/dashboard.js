@@ -544,6 +544,13 @@
     })
   }
 
+  function backToStartScreen(){
+    $('.back-to-home').on('click', 'button', function(){
+      emptyApp();
+      $('.homepage').removeClass('hidden');
+    })
+  }
+
 
 
 
@@ -569,4 +576,5 @@
   $(submitNewEvent);
   $(deleteUserEvent);
   $(logout);
+  $(backToStartScreen);
 

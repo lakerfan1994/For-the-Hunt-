@@ -190,6 +190,7 @@ body {
 .login-parent {
   display: flex;
   flex-direction: column;
+  padding-bottom: 55px;
 }
 
 .login-child {
