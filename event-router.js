@@ -43,7 +43,6 @@ eventRouter.post('/', jsonParser, (req, res) => {
       });
    });
 
-
 eventRouter.get('/:username', (req, res) => {
     const requiredKey = "username";
 
@@ -53,9 +52,73 @@ eventRouter.get('/:username', (req, res) => {
 
     User.findOne({username: req.params.username})
     .then(_user => {
+      Meetup.find({user: _user._id}).sort({date: 'desc'}).limit(5)
+      .then(applications => {         
+            res.status(200).json(applications.map(application => application.serialize()))
+      });
+    })
+    .catch(err => {
+      res.status(400).send("No user or application found");
+    })
+})
+
+
+eventRouter.get('/:username/:sort', (req, res) => {
+    const requiredKey = "username";
+    const requiredKey2 = "sort";
+
+    if(!(requiredKey in req.params || requiredKey2 in req.params)) {
+      res.status(401).send("Error: Username not included in the request parameter");
+    };
+
+    User.findOne({username: req.params.username})
+    .then(_user => {
       Meetup.find({user: _user._id})
       .then(meetups => {
-            res.status(201).json(meetups.map(meetup => meetup.serialize()))
+        let _meetups;
+         
+            if(req.params.sort === "name") {
+              _meetups = meetups.sort(function(a, b){
+                  if (a.name > b.name) {
+                    return 1;
+                  }
+                  else if (a.name < b.name) {
+                    return -1;
+                  } 
+                  else if (a.name === b.name) {
+                    return 0;
+                  }
+              });
+            } 
+
+            if(req.params.sort === "date") {
+              _meetups = meetups.sort(function(a, b){
+                  if (a.date > b.date) {
+                    return 1;
+                  }
+                  else if (a.date < b.date) {
+                    return -1;
+                  } 
+                  else if (a.date === b.date) {
+                    return 0;
+                  }
+              });
+            }
+
+            if(req.params.sort === "role") {
+              _meetups = meetups.sort(function(a, b){
+                  if (a.role > b.role) {
+                    return 1;
+                  }
+                  else if (a.role < b.role) {
+                    return -1;
+                  } 
+                  else if (a.role === b.role) {
+                    return 0;
+                  }
+              });
+            }
+            res.status(201).json(_meetups.map(meetup => meetup.serialize()))
       });
     })
     .catch(err => {

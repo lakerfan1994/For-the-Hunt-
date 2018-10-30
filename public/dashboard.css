@@ -203,8 +203,6 @@ body {
 
 .application-box, .event-box {
   margin-top: 100px;
-  height: 500px;
-  overflow-y: auto;
   display: flex;
   flex-direction: column;
 }
@@ -248,6 +246,7 @@ body {
 
 .application-container, .event-container {
   display: flex;
+  height: 55px;
   flex: 1;
   align-items: center;
 

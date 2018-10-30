@@ -44,6 +44,24 @@ applicationRouter.post('/', jsonParser, (req, res) => {
       });
    });
 
+applicationRouter.get('/:username', (req, res) => {
+    const requiredKey = "username";
+
+    if(!(requiredKey in req.params)) {
+      res.status(401).send("Error: Username not included in the request parameter");
+    };
+
+    User.findOne({username: req.params.username})
+    .then(_user => {
+      Application.find({user: _user._id}).sort({date: 'desc'}).limit(5)
+      .then(applications => {         
+            res.status(200).json(applications.map(application => application.serialize()))
+      });
+    })
+    .catch(err => {
+      res.status(400).send("No user or application found");
+    })
+})
 
 applicationRouter.get('/:username/:sort', (req, res) => {
     const requiredKey = "username";
@@ -58,7 +76,7 @@ applicationRouter.get('/:username/:sort', (req, res) => {
       Application.find({user: _user._id})
       .then(applications => {
           let _applications;
-          console.log(_applications);
+         
             if(req.params.sort === "name") {
               _applications = applications.sort(function(a, b){
                   if (a.name > b.name) {
@@ -100,7 +118,7 @@ applicationRouter.get('/:username/:sort', (req, res) => {
                   }
               });
             }
-            console.log(_applications);
+         
             res.status(201).json(_applications.map(application => application.serialize()))
             //res.status(200).json(applications.map(application => {
                   //application.serialize();
@@ -116,16 +134,18 @@ applicationRouter.delete('/', jsonParser, (req, res) => {
      neededKeys = ["name", "username"];
      for(let i = 0; i < neededKeys.length; i++) {
       if(!(neededKeys[i] in req.body)) {
-        res.status(400).send(`${neededKeys[i]} not found in request body`); 
+        return res.status(400).send(`${neededKeys[i]} not found in request body`); 
       }
      } 
 
 
      User.findOne({username: req.body.username})
      .then(_user => {
+      console.log(req.body.name);
+      console.log(_user);
         Application.findOneAndDelete({user: _user._id, name: req.body.name})
         .then(function() {
-          res.status(204).send(`${req.body.name} application deleted`);
+          res.status(204).send("Deleted data");
         })
         .catch(err => {
           res.status(500).send("Internal Server Error");

@@ -2,57 +2,7 @@
  const meetupUrl = "/events";
  const userUrl = "/user";
  const loginUrl = "/login";
- const user = {
-    username: "Sally Smith",
-    password: "password",
-    applications: [
-    {name: "Google",
-    date: new Date(),
-    role: "Junior Web Developer",
-    location: "San Francisco" ,
-    interviewExistence: true,
-    eventType: 'Interview',
-    dateOfEvent: new Date(),
-    interviewQuestions: "lorem ipsum"
-    },
-    {name: "Apple",
-    date: new Date(),
-    role: "Junior Web Developer",
-    location: "New York",
-    interviewExistence: false,
-    eventType: 'Interview'
-    },
-
-    {name: "Amazon",
-    date: new Date(),
-    role: "Junior Web Developer",
-    location: "Las Vegas",
-    interviewExistence: true,
-    eventType: 'Interview',
-    dateOfEvent: new Date(),
-    interviewQuestions: "lorem ipsum"},
-
-    {name: "Facebook",
-    date:  new Date(),
-    role: "Junior Web Developer",
-    location: "Los Angeles",
-    interviewExistence: false,
-    eventType: 'Interview'
-    }
-    ],
-    meetups: [
-    {name: "JsQueens Meetup", 
-    dateOfEvent: new Date(), 
-    location: "Queens, New York",
-    eventType: 'Meetup'
-    },
-    {name: "Javafunscript", 
-    dateOfEvent: new Date(), 
-    location: "Manhattan, New York",
-    eventType: 'Meetup'
-    }
-   ]
-  }
+ 
 
   const inspiringSayings = ["Ambition is a dream with a V8 engine - Elvis Presley", "Nothing can dim the light which shines from within" + 
   " - Maya Angelou", "The opposite of bravery is not cowardice but conformity -Robert Anthony"];
@@ -96,6 +46,19 @@
     $.ajax(params);
   }
 
+  function createNewEventInDatabase(app) {
+    const params = {
+      method: 'POST',
+      contentType: "application/json",
+      url: meetupUrl,
+      data: JSON.stringify(app),
+      error:brokenCode,
+      success: cleanCode
+    }
+
+    $.ajax(params);
+  }
+
   function getApplicationData(_username, _sort) {
     const params = {
       method: 'GET',
@@ -105,6 +68,76 @@
     }
 
     $.ajax(params);
+  }
+  function getRecentApplicationData(username) {
+    const params = {
+      method: 'GET',
+      url: `${applicationsUrl}/${username}`,
+      success: displayRecentUserApplications,
+      error: brokenCode
+    }
+    $.ajax(params);
+  }
+
+  function getEventData(_username, _sort) {
+    const params ={
+      method: 'GET',
+      url: `${meetupUrl}/${_username}/${_sort}`,
+      success: displayUserEvents
+    }
+
+    $.ajax(params);
+  }
+
+  function getRecentEventData(username) {
+    const params = {
+      method:'GET',
+      url: `${meetupUrl}/${username}`,
+      success: displayRecentUserEvents,
+      error: brokenCode
+    }
+    $.ajax(params);
+  }
+
+  function deleteApplicationData(app) {
+    const params = {
+      method: 'DELETE',
+      contentType: 'application/json',
+      url: applicationsUrl,
+      data: JSON.stringify(app),
+      error: brokenCode,
+      success: function(data) {
+        getApplicationData(app.username, 'date')
+      }
+    }
+
+    $.ajax(params);
+  }
+
+  function deleteEventData(event) {
+    const params = {
+      method: 'DELETE',
+      contentType: 'application/json',
+      url: meetupUrl,
+      data: JSON.stringify(event),
+      error: brokenCode,
+      success: function(data) {
+        getEventData(event.username, 'date');
+      }
+    }
+    $.ajax(params);
+  }
+
+  function updateApplicationData(app) {
+    //when you come back to this, make a separate interview screen for the interview part of the app
+    const params = {
+      method: 'PUT',
+      contentType: 'application/json',
+      url: applicationsUrl,
+      data: JSON.stringify(app),
+      error: brokenCode,
+      success: cleanCode
+    }
   }
 
   function submitSignupForm() {
@@ -142,6 +175,8 @@
     emptyApp();
     $('.current-user').val('');
     $('.current-user').append(`<p>${data.username}</p>`);
+    getRecentApplicationData(data.username);
+    getRecentEventData(data.username);
     $('.dashboard').removeClass('hidden');
     $('.nav-container').removeClass('hidden');
 
@@ -176,7 +211,38 @@
       let newApplication = {name: _name, date: _date, role: _role, location: _location, username: _username,
         interviewExistence: _interviewExistence, eventType: _eventType};
 
-      createNewApplicationInDatabase/(newApplication);
+      createNewApplicationInDatabase(newApplication);
+      getApplicationData(_username, 'date');
+      $('.application-overlay').addClass('hidden');
+      $('.application-modal').addClass('hidden');
+    })
+  }
+
+
+  function submitNewEvent(){
+    $('.new-event-form').submit(function(event){
+      event.preventDefault();
+      let _name = $('#meetup').val().trim();
+      let _location = $('#event-location').val().trim();
+      let _username = $('.current-user').text().trim();
+      let _dateOfEvent = $('#event-date').val();
+      let _eventType = 'Meetup';
+
+      let newEvent = {name: _name, location: _location, username: _username, dateOfEvent: _dateOfEvent,
+       eventType: _eventType};
+
+       createNewEventInDatabase(newEvent);
+       getEventData(_username, 'date');
+       $('.event-overlay').addClass('hidden');
+       $('.event-modal').addClass('hidden');
+       
+
+     /* createNewApplicationInDatabase(newApplication);
+      getApplicationData(_username, 'date');
+      $('.application-overlay').addClass('hidden');
+      $('.application-modal').addClass('hidden');
+*/
+
 
 
     })
@@ -186,13 +252,53 @@
 
 
   function displayUserApplications(data) {
+    $('.application-box').text('');
+    $('.application-box').append(
+      `<h2 class="centered-text application-header">List of Applications</h2>
+       <button class= "col-6 create-application">Create a new application</button>
+       <div class= "application-container centered-text">
+                  <div class="application-item">
+                      <h2>Company</h2>
+                  </div>
+                  <div class="application-item not-on-small-screens">
+                    <h2>Role</h2>
+                  </div>
+                  <div class="application-item">
+                    <h2>Date Applied</h2>
+                  </div>
+                  <div class= "application-button">
+                    <i class="fas fa-edit list-legend"></i>
+                  </div>
+                  <div class= " application-button">
+                    <i class="fas fa-trash-alt list-legend"></i>
+                  </div> 
+            </div>`);
     let applications = data.map(app => createApplicationObject(app));
     $('.application-box').append(applications);
   }
 
+  function displayRecentUserApplications(data) {
+    $('.applications-dashboard').text('');
+    $('.applications-dashboard').append( `<div class= "application-container centered-text">
+                  <div class="application-item">
+                      <h2>Company</h2>
+                  </div>
+                  <div class="application-item not-on-small-screens">
+                    <h2>Role</h2>
+                  </div>
+                  <div class="application-item">
+                    <h2>Date Applied</h2>
+                  </div>
+               </div>`
+     );
+    let applications = data.map(app => createRecentApplicationObject(app));
+    $('.applications-dashboard').append(applications);
+  }
+
+
   function createApplicationObject(application) {
       return `<div class= "application-container centered-text">
-                  <div class="application-item">
+                  <div class="application-item application-name">
                       <span>${application.name}</span>
                   </div>
                   <div class="application-item not-on-small-screens">
@@ -201,58 +307,134 @@
                   <div class="application-item">
                     <span>${new Date(application.date).toDateString()}</span>
                   </div>
-                  <div class= "application-button">
+                  <div class= "application-button application-update">
                       <a href="#"><i class="fas fa-marker"></i></a>
                   </div>
-                  <div class= "application-button">
+                  <div class= "application-button application-delete">
                     <a href="#"><i class="fas fa-minus-circle"></i></a>
                   </div>
             </div>`
 
   }
 
-  function displayUserEvents() {
-    let events = "";
-    let appsWithInterviews = [];
+  function createRecentApplicationObject(app) {
+    return `<div class= "application-container centered-text">
+                  <div class="application-item">
+                      <span>${app.name}</span>
+                  </div>
+                  <div class="application-item not-on-small-screens">
+                    <span>${app.role}</span>
+                  </div>
+                  <div class="application-item">
+                    <span>${new Date(app.date).toDateString()}</span>
+                  </div>
+               </div>`
+  }
 
-    appsWithInterviews = user.applications.filter(hasInterview);
+  function deleteUserApplication() {
+    $('.application-box').on('click', '.application-delete', function(){
+      let _username = $('.current-user').text().trim();
+      let _name = $(this).siblings('.application-name').text().trim();
+      let app = {username: _username, name: _name};
+      deleteApplicationData(app);
+    })
+  }
 
-    let allEvents = appsWithInterviews.concat(user.meetups);
+  function deleteUserEvent() {
+    $('.event-box').on('click', '.event-delete', function(){
+      let _username = $('.current-user').text().trim();
+      let _name = $(this).siblings('.event-name').text().trim();
+      let app = {username: _username, name: _name};
+      deleteEventData(app);
+    })
+  }
 
-    for (let i = 0; i < allEvents.length; i++){
-      events += createEventObject(allEvents[i]);
-    }
+    function addUserInterview() {
+    $('application-box').on('click', 'application-update', function() {
+      let _username = $('.current-user').text().trim();
+      let _name = $(this).siblings('.application-update').text().trim();
+      let app = {username: _username, name: _name};
+
+    } )
+  }
+
+  function displayUserEvents(data) {
+
+    $('.event-box').text('');
+    $('.event-box').append(`<h2 class="centered-text event-header">List of Events</h2>
+               <button class= "col-6 create-event">Create a new event</button>
+               <div class= "event-container centered-text">
+                  <div class="event-item">
+                      <h2>Event</h2>
+                  </div>
+                  <div class="event-item not-on-small-screens">
+                    <h2>Type</h2>
+                  </div>
+                  <div class="event-item">
+                    <h2>Date</h2>
+                  </div>
+                  <div class= "event-item">
+                    <h2>Location</h2>
+                  </div>
+                  <div class= " event-button ">
+                    <i class="fas fa-trash-alt list-legend"></i>
+                  </div> 
+            </div>`)
+    let events = data.map(event => createEventObject(event));
     $('.event-box').append(events);
 
-
   }
 
-  function hasInterview(application) {
-    return application.interviewExistence 
+    function displayRecentUserEvents(data) {
+    $('.interviews-dashboard').text('');
+    $('.interviews-dashboard').append(`<div class= "event-container centered-text">
+                  <div class="event-item">
+                      <h2>Event</h2>
+                  </div>
+                  <div class="event-item not-on-small-screens">
+                    <h2>Date</h2>
+                  </div>
+                  <div class="event-item">
+                    <h2>Location</h2>
+                  </div>
+               </div>`
+      );
+    let events= data.map(event => createRecentEventObject(event));
+    $('.interviews-dashboard').append(events);
   }
-
-
 
   function createEventObject(event){
       return `<div class= "event-container centered-text">
-                  <div class="event-item">
+                  <div class="event-item event-name">
                       <span>${event.name}</span>
                   </div>
                   <div class="event-item not-on-small-screens">
                     <span>${event.eventType}</span>
                   </div>
                   <div class="event-item">
-                    <span>${event.dateOfEvent.toDateString()}</span>
+                    <span>${new Date(event.dateOfEvent).toDateString()}</span>
                   </div>
-                  <div class= "event-button">
-                      <i class="fas fa-marker"></i>
+                  <div class= "event-item">
+                     <span>${event.location}</span>
                   </div>
-                  <div class= "event-button">
-                    <i class="fas fa-minus-circle"></i>
+                  <div class= "event-button event-delete">
+                    <a href="#"><i class="fas fa-minus-circle"></i></a>
                   </div>
             </div>`
+  }
 
-
+   function createRecentEventObject(app) {
+    return ` <div class= "event-container centered-text">
+                  <div class="event-item">
+                      <span>${app.name}</span>
+                  </div>
+                  <div class="event-item not-on-small-screens">
+                    <span>${new Date(app.dateOfEvent).toDateString()}</span>
+                  </div>
+                  <div class="event-item">
+                    <span>${app.location}</span>
+                  </div>
+               </div>`
   }
 
 
@@ -305,6 +487,8 @@
   function moveToEventsList() {
     $('.nav-container').on('click', '.nav-events', function(){
       emptyApp();
+      let _username = $('.current-user').text().trim();
+      getEventData(_username, "date");
       $('.events-and-interviews').removeClass('hidden');
     })
   }
@@ -351,6 +535,16 @@
     })
   }
 
+  function logout() {
+    $('.nav-container').on('click', '.nav-logout', function() {
+      emptyApp();
+      $('.nav-container').addClass('hidden');
+      $('.current-user').text('');
+      $('.homepage').removeClass('hidden');
+    })
+  }
+
+
 
 
 
@@ -371,4 +565,8 @@
   $(moveToLogin);
   $(loginFromLoginPage);
   $(submitNewApplication);
+  $(deleteUserApplication);
+  $(submitNewEvent);
+  $(deleteUserEvent);
+  $(logout);
 
