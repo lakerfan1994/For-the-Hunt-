@@ -1,9 +1,278 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<title>For the Hunt!</title>
-</head>
-<body>
-	<h1>Hello World!</h1>
-</body>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>For the Hunt! Dashboard</title>
+    <link href="dashboard.css" rel="stylesheet" type="text/css" />
+    <link href="grid.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
+   <script src="dashboard.js"></script>
+  </head>
+  <body>
+
+    <div class="current-user">
+    </div>
+
+    <div class="homepage">
+      <div class="homepage-navbar">
+        <div class="balance-div">
+        </div>
+        <div class="homepage-signup">
+          <a href="#"><h3 class="centered-text">Sign Up</h3></a>
+        </div>
+        <div class="homepage-login">
+          <a href= "#"><h3 class="centered-text">Login</h3></a>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <nav role="navigation">
+      <div class="nav-container hidden">
+        <div class="nav-button nav-applications"><a href="#"><p class="centered-text">Applications   <i class="fas fa-folder"></i></p></a></div>
+        <div class="nav-button nav-events"><a href="#"><p class="centered-text">Events<i class="fas fa-user-friends"></i></p></a></div>
+        <div class="nav-button nav-homepage"><a href="#"><p class="centered-text">Dashboard<i class="fas fa-medal"></i></p> </a></div>
+        <div class="nav-button nav-logout"><a href="#"><p class="centered-text">Logout<i class="fas fa-home"></i></p></a></div>
+      </div>
+    </nav>
+    <main>
+
+      <div class="dashboard hidden ">
+        <div class="row">
+          <div class="character-portrait col-3">
+            <h2 class=" centered-text">Level 3 Job Hunter</h2>
+            <img class="current-avatar centered-text" src="https://i.kym-cdn.com/photos/images/newsfeed/000/988/052/2ab.gif">
+          </div>
+        </div>
+        <div class="most-recent-main-container">
+        <div class="most-recent-main top">
+            <h2 class= "centered-text">Most Recent Applications</h2>
+            <div class="most-recent applications-dashboard">
+              <div class= "application-container centered-text">
+                  <div class="application-item">
+                      <h2>Company</h2>
+                  </div>
+                  <div class="application-item not-on-small-screens">
+                    <h2>Role</h2>
+                  </div>
+                  <div class="application-item">
+                    <h2>Date Applied</h2>
+                  </div>
+               </div>
+            </div>
+        </div>
+        <div class="most-recent-main">
+          <h2 class= "centered-text">Upcoming Events</h2>
+          <div class="most-recent interviews-dashboard">
+            <div class= "event-container centered-text">
+                  <div class="event-item">
+                      <h2>Event</h2>
+                  </div>
+                  <div class="event-item not-on-small-screens">
+                    <h2>Date</h2>
+                  </div>
+                  <div class="event-item">
+                    <h2>Location</h2>
+                  </div>
+               </div>
+
+          </div>
+        </div>
+       </div>   
+      </div> 
+
+
+      <div class="sign-up-main hidden">
+      	<div class="row ">
+      		<div class=" sign-up col-6">
+      			<h2 class="centered-text">For the Hunt! Find your dream job today</h2>
+      			<div class="entire-form-container">
+      				<div class="sign-up-parent">
+      					<p>placeholder for future image</p>
+      				</div>	
+      				<form class="sign-up-parent" aria-live="assertive">
+      					<h2 class="centered-text">Sign Up Now!</h2>
+      					<label class="aria-friendly-label" for="signup-username">Username</label>
+      					<input class="sign-up-child" type="text" id="signup-username" required placeholder="Username" maxlength="30">
+      					<label class="aria-friendly-label" for="signup-password">Password</label>
+      					<input class="sign-up-child" type="text" id="signup-password" placeholder="Password" required maxlength="30">
+      					<button type="submit" class="sign-up-submit">Submit</button>
+      				</form>
+      		</div>
+            <div class="password-validation hidden">
+              <h4 class="centered-text">Password must be longer than 10 characters and less than 72</h4>
+            </div>
+            <div class="user-confirm centered-text hidden">
+              <button class= "user-confirm-button">User saved, press this button to login</button>
+            </div> 
+      		</div>
+            <div class= 'back-to-home centered-text'>
+              <button>Back to Homepage</button>
+            </div>
+      	</div>	
+      </div>
+
+      <div class="login-main hidden">
+      	<div class="row">
+      		<div class="login col-4">
+      			<h2>Login</h2>
+      			<form class=login-parent aria-live="assertive">
+      				<label class="aria-friendly-label" for="username">Username</label>
+      				<input class="login-child login-username" required type="text" id="username" placeholder="Username" maxlength="30">
+      				<label class="aria-friendly-label" for="password">Password</label>
+      				<input class="login-child login-password" required type="text" id="password" placeholder="Password" maxlength="30">
+      				<button type="submit" class="login-submit">Login</button>
+      			</form>
+              <div class= 'back-to-home centered-text'>
+              <button>Back to Homepage</button>
+            </div>
+      		</div>
+      	</div>	
+      </div>
+
+
+      <div class="application-overlay hidden  "></div>
+      <div class= "application-modal col-6 hidden ">
+       <a href="#"><p class="application-exit">Back to list   <i class="fas fa-sign-out-alt"></i></p></a>
+       <form class="new-application-form" aria-live= "assertive">
+        <div class= new-application>
+          <header class="new-application-header">New Application</header>
+          <label class= "aria-friendly-label" for="company">Name of Company ex. Google</label>
+          <input class= "new-application-form-input" type="text" id="application-company" placeholder="Name of Company, ex. Google">
+          <label class= "aria-friendly-label" for="role">Position applied for ex. Developer</label>
+          <input class= "new-application-form-input" type= "text" id= "application-role" placeholder="Position applied for ex. Developer">
+          <label class= "aria-friendly-label" for="location">Location ex. San Francisco</label>
+          <input class= "new-application-form-input" type= "text" id= "application-location" placeholder="Location ex. San Franscisco">
+          <label class="new-application-form-input align-self-center"  for="interview"><span class="input-checkbox">Do you have an interview?</span>
+            <input type= "checkbox" id= "interview" placeholder="Do you have an interview?">
+          </label>
+          <div class="new-application-form-input"> 
+             <label class= "new-application-form-input" for="interviewDate"><span class=" input-checkbox">If yes, when is the interview?</span></label>
+             <input class="parent-width" type= "date" id= "interviewDate"> 
+          </div>   
+        </div>
+        <div class="submit-and-quotes">
+          <div class="application-character-portrait">
+            <div class="character-portrait col-3">
+                <img class="current-avatar centered-text" src="https://i.kym-cdn.com/photos/images/newsfeed/000/988/052/2ab.gif">
+                <span class="interesting-qoute"></span>
+            </div> 
+          </div>
+          <div class="application-submit-button-container">
+              <button type="submit" class="application-submit-button"><p>Submit</p></button> 
+          </div>  
+        </div>
+       </form>   
+      </div> 
+
+
+      <div class="application hidden">
+      	<div class="row">
+          <div class="character-portrait col-3">
+            <h2 class=" centered-text">Level 3 Job Hunter</h2>
+            <img class="current-avatar centered-text" src="https://i.kym-cdn.com/photos/images/newsfeed/000/988/052/2ab.gif">
+          </div>
+      		<div class="col-6 application-box">
+      			<h2 class="centered-text application-header">List of Applications</h2>
+            <button class= "col-6 create-application">Create a new application</button>
+            <div class= "application-container centered-text">
+                  <div class="application-item">
+                      <h2>Company</h2>
+                  </div>
+                  <div class="application-item not-on-small-screens">
+                    <h2>Role</h2>
+                  </div>
+                  <div class="application-item">
+                    <h2>Date Applied</h2>
+                  </div>
+                  <div class= "application-button">
+                    <i class="fas fa-edit list-legend"></i>
+                  </div>
+                  <div class= " application-button">
+                    <i class="fas fa-trash-alt list-legend"></i>
+                  </div> 
+            </div>
+      		</div>
+      	</div>	
+      </div>
+
+      <div class="events-and-interviews hidden">
+        <div class="row">
+          <div class="character-portrait col-3">
+            <h2 class=" centered-text">Level 3 Job Hunter</h2>
+            <img class="current-avatar centered-text" src="https://i.kym-cdn.com/photos/images/newsfeed/000/988/052/2ab.gif">
+          </div>
+            <div class="col-6 event-box">
+               <h2 class="centered-text event-header">List of Events</h2>
+               <button class= "col-6 create-event">Create a new event</button>
+               <div class= "event-container centered-text">
+                  <div class="event-item">
+                    <h2>Event</h2>
+                  </div>
+                  <div class="event-item not-on-small-screens">
+                    <h2>Type</h2>
+                  </div>
+                  <div class="event-item">
+                    <h2>Date</h2>
+                  </div>
+                  <div class= "event-item">
+                    <h2>Location</h2>
+                  </div>
+                  <div class= " event-button">
+                    <i class="fas fa-trash-alt list-legend"></i>
+                  </div> 
+            </div>`
+          </div>
+        </div>
+      </div>
+
+    <div class="event-overlay hidden "></div>
+      <div class= "event-modal hidden col-6">
+       <a href="#"><p class="event-exit">Back to list   <i class="fas fa-sign-out-alt"></i></p></a>
+       <form class="new-event-form" aria-live= "assertive">
+        <div class= new-event>
+          <header class="new-event-header">New Meetup</header>
+          <label class= "aria-friendly-label" for="meetup">Name of Meetup</label>
+          <input class= "new-event-form-input" type="text" id="meetup" placeholder="Name of Meetup">
+           <div class="new-event-form-input"> 
+             <label class= "new-event-form-input" for="eventDate"><span class=" input-checkbox">Date of Event</span></label>
+             <input class="parent-width" type= "date" id= "event-date"> 
+          </div>  
+          <label class= "aria-friendly-label" for="location">Location ex. San Francisco</label>
+          <input class= "new-event-form-input" type= "text" id= "event-location" placeholder="Location ex. San Franscisco">
+        </div>
+        <div class="submit-and-quotes">
+          <div class="event-character-portrait">
+            <div class="character-portrait col-3">
+                <img class="current-avatar centered-text" src="https://i.kym-cdn.com/photos/images/newsfeed/000/988/052/2ab.gif">
+                <span class="interesting-qoute"></span>
+            </div> 
+          </div>
+          <div class="event-submit-button-container">
+              <button type="submit" class="event-submit-button"><p>Submit</p></button> 
+          </div>  
+        </div>
+       </form>   
+      </div> 
+
+      <div class= "character-status hidden">
+        <div class="character-portrait col-3">
+          <h2 class=" centered-text">Level 3 Job Hunter</h2>
+          <img class="current-avatar centered-text" src="https://i.kym-cdn.com/photos/images/newsfeed/000/988/052/2ab.gif">
+          <div class="level-up">
+              <span class= "centered-text block"><span class="jobs-needed"></span>needed to level up</span>
+          </div>
+
+        </div>
+      </div>
+     </main>   
+  </body>
 </html>

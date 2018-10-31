@@ -292,12 +292,13 @@ body {
 
 .new-application-form, .new-event-form {
   display: flex;
+  flex-direction: column;
   width: 100%;
   height: 90%;
 }
 
 .new-application, .new-event{
-  flex: 1;
+  flex: 5;
   display: flex;
   flex-direction: column;
 }
@@ -309,8 +310,11 @@ body {
   flex: 1;
 }
 .new-application-form-input, .new-event-form-input{
-  margin-bottom:40px;
   border-radius: 10px;
+  width: 80%;
+}
+
+.new-application-form-input-container, .new-event-form-input-container {
   flex: 1;
 }
 

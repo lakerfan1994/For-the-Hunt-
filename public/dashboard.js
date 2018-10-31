@@ -3,10 +3,6 @@
  const userUrl = "/user";
  const loginUrl = "/login";
  
-
-  const inspiringSayings = ["Ambition is a dream with a V8 engine - Elvis Presley", "Nothing can dim the light which shines from within" + 
-  " - Maya Angelou", "The opposite of bravery is not cowardice but conformity -Robert Anthony"];
-
   function addUserToDatabase(user) {
     const params = {
       method: 'POST',
@@ -236,15 +232,6 @@
        $('.event-overlay').addClass('hidden');
        $('.event-modal').addClass('hidden');
        
-
-     /* createNewApplicationInDatabase(newApplication);
-      getApplicationData(_username, 'date');
-      $('.application-overlay').addClass('hidden');
-      $('.application-modal').addClass('hidden');
-*/
-
-
-
     })
   }
 
@@ -502,6 +489,9 @@
 
   function moveToDashboard(){
     $('.nav-container').on('click', '.nav-homepage', function(){
+      let _username = $('.current-user').text().trim();
+      getRecentApplicationData(_username);
+      getRecentEventData(_username);
       emptyApp();
       $('.dashboard').removeClass('hidden');
     })
