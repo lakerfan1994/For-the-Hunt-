@@ -44,7 +44,7 @@ const localAuth = function(req, res, next) {
 // The user provides a username and password to login
 authRouter.post('/', localAuth, (req, res) => {
   const authToken = createAuthToken(req.body);
-  res.json({authToken, username: req.body.username});
+  res.status(201).json({authToken, username: req.body.username});
 });
 
 module.exports = authRouter;

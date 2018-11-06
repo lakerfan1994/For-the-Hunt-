@@ -86,6 +86,12 @@ router.post('/', jsonParser, (req, res) => {
     });
   }
 
+   goodUsername = req.body.username.replace(/[^a-zA-Z ]/g, "");
+
+   if(!(req.body.username === goodUsername)){
+        return res.status(422).send('Username must not contain special characters');
+      }
+
 
 
   let {username, password} = req.body;

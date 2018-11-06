@@ -9,7 +9,7 @@
       contentType: 'application/json',
       url: userUrl,
       data: JSON.stringify(user),
-      error: brokenCode,
+      error: userAlreadyExists,
       success: confirmUser
     }
     $.ajax(params);
@@ -21,7 +21,7 @@
       contentType: 'application/json',
       url: loginUrl,
       data: JSON.stringify(user),
-      error: brokenCode,
+      error: usernameOrPasswordIncorrect,
       success: loginSuccess
     }
 
@@ -35,7 +35,7 @@
       contentType: 'application/json',
       url: applicationsUrl,
       data: JSON.stringify(app),
-      error: brokenCode,
+      error: appAlreadyExistsError,
       success: cleanCode   
     }
 
@@ -48,7 +48,7 @@
       contentType: "application/json",
       url: meetupUrl,
       data: JSON.stringify(app),
-      error:brokenCode,
+      error: eventAlreadyExistsError,
       success: cleanCode
     }
 
@@ -56,6 +56,8 @@
   }
 
   function getApplicationData(_username, _sort) {
+    $('.application-error').text('');
+    $('.event-error').text('');
     const params = {
       method: 'GET',
       url: `${applicationsUrl}/${_username}/${_sort}`,
@@ -76,6 +78,8 @@
   }
 
   function getEventData(_username, _sort) {
+    $('.application-error').text('');
+    $('.event-error').text('');
     const params ={
       method: 'GET',
       url: `${meetupUrl}/${_username}/${_sort}`,
@@ -136,20 +140,61 @@
     }
   }
 
+  function userAlreadyExists(data) {
+    $('.user-validation').removeClass('hidden');
+    $('.user-validation').focus();
+    $('.username-validation').addClass('hidden');
+    $('.password-validation').addClass('hidden');
+    $('#signup-username').val('');
+  }
+
+  function usernameOrPasswordIncorrect(data) {
+    $('.login-validation').removeClass('hidden');
+    $('.login-validation').focus();
+    $('.login-username').val('');
+    $('.login-password').val('');
+  }
+
+  function appAlreadyExistsError(data) {
+    $('.application-error').append(`<h4>${data.responseText}</h4>`);
+  }
+
+  function eventAlreadyExistsError(data) {
+
+    $('.event-error').append(`<h4>${data.responseText}</h4>`);
+  }
+
   function submitSignupForm() {
     $('.sign-up-parent').submit(function(event) {
       event.preventDefault();
+      let readyToBeSent = true;
       let _username = $('#signup-username').val();
       _username = _username.trim(); 
+      goodUsername = _username.replace(/[^a-zA-Z ]/g, "");
+      if(!(_username === goodUsername)){
+        readyToBeSent = false;
+        $('.username-validation').removeClass('hidden');
+        $('.username-validation').focus();
+        $('.user-validation').addClass('hidden');
+        $('.password-validation').addClass('hidden');
+        $('#signup-username').val('');
+      }
+
       let _password = $('#signup-password').val();
       _password = _password.trim();
       if(_password.length < 10 || _password.length > 72) {
+        readyToBeSent = false;
         $('.password-validation').removeClass('hidden');
+        $('.password-validation').focus();
+        $('.username-validation').addClass('hidden');
+        $('.user-validation').addClass('hidden');
         $('#signup-password').val('');
       }
 
       const newUser = {username: _username, password: _password};
+      if(readyToBeSent){
       addUserToDatabase(newUser);
+      } 
     })
   }
 
@@ -171,25 +216,51 @@
     emptyApp();
     $('.current-user').val('');
     $('.current-user').append(`<p>${data.username}</p>`);
+
     getRecentApplicationData(data.username);
     getRecentEventData(data.username);
     $('.dashboard').removeClass('hidden');
     $('.nav-container').removeClass('hidden');
+    $('header').addClass('hidden');
+    $('.homepage-navbar').addClass('hidden');
 
+  }
+
+  function onPageLoad(){
+    if(localStorage.getItem('authToken')) {
+      let token = localStorage.getItem('authToken');
+      var base64Url = token.split('.')[1]; 
+      var base64 = base64Url.replace('-', '+').replace('_', '/'); 
+      let user = JSON.parse(window.atob(base64));
+      emptyApp();
+      $('.current-user').val('');
+      $('.current-user').append(`<p>${user.user.username}</p>`);
+      getRecentApplicationData(user.user.username);
+      getRecentEventData(user.user.username);
+      $('.dashboard').removeClass('hidden');
+      $('.nav-container').removeClass('hidden');
+      $('header').addClass('hidden');
+      $('.homepage-navbar').addClass('hidden');
+
+    }
   }
 
   function confirmUser() {
     $('.user-confirm').removeClass('hidden');
+    $('.user-validation').addClass('hidden');
+    $('.username-validation').addClass('hidden');
+    $('.password-validation').addClass('hidden');
   }
 
 
   function brokenCode(data) {
-    console.log(`oh no!! it broke`);
+    console.log(data);
   }
 
   function cleanCode(data) {
+    $('.application-error').text('');
+    $('.event-error').text('');
     console.log('yiss, shit worked!');
-    console.log(data);
   }
 
 
@@ -222,7 +293,10 @@
       let _location = $('#event-location').val().trim();
       let _username = $('.current-user').text().trim();
       let _dateOfEvent = $('#event-date').val();
-      let _eventType = 'Meetup';
+      let _eventType = 'Interview';
+      if(($('#meetup-type:checked').val() === undefined)) {
+        _eventType = 'Meetup';
+      }
 
       let newEvent = {name: _name, location: _location, username: _username, dateOfEvent: _dateOfEvent,
        eventType: _eventType};
@@ -253,11 +327,8 @@
                   <div class="application-item">
                     <h2>Date Applied</h2>
                   </div>
-                  <div class= "application-button">
-                    <i class="fas fa-edit list-legend"></i>
-                  </div>
                   <div class= " application-button">
-                    <i class="fas fa-trash-alt list-legend"></i>
+                    <i class="fas fa-trash-alt list-legend" alt="header for delete button icons"></i>
                   </div> 
             </div>`);
     let applications = data.map(app => createApplicationObject(app));
@@ -294,11 +365,8 @@
                   <div class="application-item">
                     <span>${new Date(application.date).toDateString()}</span>
                   </div>
-                  <div class= "application-button application-update">
-                      <a href="#"><i class="fas fa-marker"></i></a>
-                  </div>
                   <div class= "application-button application-delete">
-                    <a href="#"><i class="fas fa-minus-circle"></i></a>
+                    <a href="#"><span class="aria-friendly-label">Delete Button></span><i class="fas fa-minus-circle" alt="delete button"></i></a>
                   </div>
             </div>`
 
@@ -360,11 +428,11 @@
                   <div class="event-item">
                     <h2>Date</h2>
                   </div>
-                  <div class= "event-item">
+                  <div class= "event-item not-on-small-screens">
                     <h2>Location</h2>
                   </div>
                   <div class= " event-button ">
-                    <i class="fas fa-trash-alt list-legend"></i>
+                    <i class="fas fa-trash-alt list-legend" alt="header for delete buttons"></i>
                   </div> 
             </div>`)
     let events = data.map(event => createEventObject(event));
@@ -373,7 +441,7 @@
   }
 
     function displayRecentUserEvents(data) {
-    $('.interviews-dashboard').text('');
+    $('.interviews-dashboard').html('');
     $('.interviews-dashboard').append(`<div class= "event-container centered-text">
                   <div class="event-item">
                       <h2>Event</h2>
@@ -401,11 +469,11 @@
                   <div class="event-item">
                     <span>${new Date(event.dateOfEvent).toDateString()}</span>
                   </div>
-                  <div class= "event-item">
+                  <div class= "event-item not-on-small-screens">
                      <span>${event.location}</span>
                   </div>
                   <div class= "event-button event-delete">
-                    <a href="#"><i class="fas fa-minus-circle"></i></a>
+                    <a href="#"><span class="aria-friendly-label">Delete Button></span><i class="fas fa-minus-circle" alt= "delete button"></i></a>
                   </div>
             </div>`
   }
@@ -501,6 +569,7 @@
     $('.application').on('click', '.create-application', function(){
       $('.application-overlay').removeClass('hidden');
       $('.application-modal').removeClass('hidden');
+      $('.new-application-form').focus();
     })
   }
 
@@ -508,6 +577,7 @@
     $('.application-modal').on('click', '.application-exit', function(){
       $('.application-overlay').addClass('hidden');
       $('.application-modal').addClass('hidden');
+      $('.application-box').focus();
     })
   }
 
@@ -515,6 +585,7 @@
     $('.events-and-interviews').on('click', '.create-event', function(){
       $('.event-overlay').removeClass('hidden');
       $('.event-modal').removeClass('hidden');
+      $('.new-event-form').focus();
     })
   }
 
@@ -522,15 +593,19 @@
     $('.event-modal').on('click', '.event-exit', function(){
       $('.event-overlay').addClass('hidden');
       $('.event-modal').addClass('hidden');
+      $('.event-box').focus();
     })
   }
 
   function logout() {
     $('.nav-container').on('click', '.nav-logout', function() {
       emptyApp();
+      localStorage.removeItem('authToken');
       $('.nav-container').addClass('hidden');
       $('.current-user').text('');
       $('.homepage').removeClass('hidden');
+      $('header').removeClass('hidden');
+      $('.homepage-navbar').removeClass('hidden');
     })
   }
 
@@ -567,4 +642,5 @@
   $(deleteUserEvent);
   $(logout);
   $(backToStartScreen);
+  $(onPageLoad);
 

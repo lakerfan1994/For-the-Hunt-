@@ -16,8 +16,8 @@ const applicationSchema = mongoose.Schema({
 	role: {type: String, required: true},
 	user: {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true},
 	location: {type: String, required: true},
-	interviewExistence: {type: Boolean, required: true},
-	eventType: {type: String, required: true},
+	interviewExistence: {type: Boolean, required: false},
+	eventType: {type: String, required: false},
 	dateOfEvent: {type: Date, required: false},
 	interviewQuestions: {type: String, required: false}
 });

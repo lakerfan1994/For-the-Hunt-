@@ -1,3 +1,63 @@
+ *{
+  box-sizing: border-box;
+ }
+
+ @font-face {
+  font-family:"Cool-font";
+  src: url("./METALORD.TTF") format("truetype");
+}
+
+.cool-font {
+  font-family: Cool-font;
+  font-size: 45px;
+}
+
+
+ header {
+  width: 100%;
+  height: 100%;
+
+  background: url('./homescreen.jpg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+ }
+
+ .dashboard-picture {
+  height: 300px;
+  background: url('./Computer_keyboard.png') no-repeat center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+ }
+
+ .branding-image{
+  font-size: 60px;
+  text-align: center;
+  font-family: 'Bungee Shade', cursive;
+  color: black;
+  margin-top: 0px;
+ }
+
+ .brand{
+  font-size: 25px;
+  text-align: center;
+  color: black;
+  font-family: 'Bungee Shade', cursive;
+ }
+
+ .current-avatar {
+  width: 100%;
+ }
+
+
+
+
+
+
+
 
 .current-user p {
   display: hidden;
@@ -7,6 +67,7 @@
 
 .homepage-navbar {
   display: flex;
+  background: lightblue;
 }
 
 .homepage-signup {
@@ -19,6 +80,7 @@
 
 
 .nav-container {
+  position: relative;
   display: flex;
   width: 100%;
   background-color: lightblue
@@ -26,6 +88,8 @@
 
 body {
   margin: 0px;
+  width: 100%;
+  height: 700px;
 }
 
 .nav-button {
@@ -34,7 +98,7 @@ body {
 
 
 .parent-width {
-  width: 100%;
+  /*width: 100%;*/
   border-radius: 10px;
 }
 
@@ -80,24 +144,55 @@ body {
 }
 
 .sign-up{
-  margin-top: 100px;
-  height: 500px;
+  margin-top: 50px;
+  height: 650px;
+  background: orange;
+  border-radius: 20px;
 }
 
-.password-validation {
+
+/*.sign-up-submit {
+    display: inline-block;
+    padding: 1.0625em 1.875em;
+    border-radius: 5px;
+    font-weight: 700;
+    font-size: 1em;
+    line-height: 1.133;
+    -webkit-font-smoothing: antialiased;
+    transition: 150ms ease;
+    transition-property: background-color, border-color, box-shadow, color;
+    text-align: center;
+}*/
+
+  button {
+    display: inline-block;
+    background: whitesmoke;
+    width: 210px;
+    margin-bottom: 15px;
+    padding: 1.0625em 1.875em;
+    border-radius: 5px;
+    font-weight: 700;
+    font-size: 1em;
+    line-height: 1.133;
+    -webkit-font-smoothing: antialiased;
+    transition: 150ms ease;
+    transition-property: background-color, border-color, box-shadow, color;
+    text-align: center;
+    border-radius: 30px;
+}
+
+
+
+ .username-validation, .password-validation, .user-validation {
   padding-top: 75px;
 }
 
 .login {
-  margin-top: 100px;
-  height: 500px;
+  margin-top: 50px;
+  height: 650px;
+  background: orange;
   border: 1px solid black;
-}
-
-.current-avatar {
-  width: 100px;
-  height: 100px;
-  margin-left: 40%;
+  border-radius: 20px;
 }
 
  .not-on-small-screens {
@@ -173,7 +268,7 @@ body {
 
 }
 .aria-friendly-label {
-  display: none;
+  font-size: 0px;
 }
 
 .sign-up-parent {
@@ -185,17 +280,44 @@ body {
 .sign-up-child {
   flex: 1;
   margin-top: 10px;
+  display: inline-block;
+    height: 3.2em;
+    width: 100%;
+    margin: 0 0 15px;
+    padding: 1em 1em;
+    color: #30373b;
+    font-size: 1em;
+    box-shadow: 0 0 0 1px #c4cdd5;
+    border: 0;
+    border-radius: 5px;
+    background-color: #ffffff;
+    transition: padding 150ms;
+    -webkit-appearance: none;
 }
 
 .login-parent {
   display: flex;
   flex-direction: column;
-  padding-bottom: 55px;
+  padding-bottom: 10px;
 }
 
 .login-child {
   flex: 1;
   margin-bottom: 10px;
+  display: inline-block;
+    height: 3.2em;
+    width: 100%;
+    margin: 0 0 15px;
+    padding: 1em 1em;
+    color: #30373b;
+    font-size: 1em;
+    box-shadow: 0 0 0 1px #c4cdd5;
+    border: 0;
+    border-radius: 5px;
+    background-color: #ffffff;
+    transition: padding 150ms;
+    -webkit-appearance: none;
+
 }
 
 .entire-form-container {
@@ -203,7 +325,6 @@ body {
 }
 
 .application-box, .event-box {
-  margin-top: 100px;
   display: flex;
   flex-direction: column;
 }
@@ -218,16 +339,16 @@ html, body {
 body {
     position: relative; /* needed for the overlay to extend when you scroll */
     /* general styles */
-    font-family: 'Open Sans', sans-serif;
-    background: darkgrey;
-    color: whitesmoke;
+    font-family: 'Oswald', sans-serif;
+    background: whitesmoke;
+    color: black;
 }
 
 .application-overlay, .event-overlay{
     position: absolute;
     top: 0;
     left: 0;
-    height: 100%;
+    height: 1000px;
     width: 100%;
     background-color: rgba(0,0,0,0.5);
     z-index: 10;
@@ -310,12 +431,36 @@ body {
   flex: 1;
 }
 .new-application-form-input, .new-event-form-input{
-  border-radius: 10px;
-  width: 80%;
+    display: inline-block;
+    height: 3.2em;
+    width: 100%;
+    margin: 0 0 15px;
+    padding: 1em 1em;
+    color: #30373b;
+    font-size: 1em;
+    box-shadow: 0 0 0 1px #c4cdd5;
+    border: 0;
+    border-radius: 5px;
+    background-color: #ffffff;
+    transition: padding 150ms;
+    -webkit-appearance: none;
+    border-radius: 10px;
 }
 
 .new-application-form-input-container, .new-event-form-input-container {
+  display: flex;
+  flex-direction: column;
   flex: 1;
+}
+
+.new-event-form-input-container-row {
+  margin-top: 20px;
+  display: flex;
+  flex: 1;
+}
+
+.new-event-form-input-container-row label {
+  padding-left: 30%;
 }
 
 .align-self-center {

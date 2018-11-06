@@ -28,11 +28,12 @@ applicationRouter.post('/', jsonParser, (req, res) => {
       			}
       			Application.create(newApp)
       			.then(function(app){
+              console.log("are you sure");
       				res.status(201).json(app.serialize());
       			})
       		}
       		else {
-      		res.status(400).send("App has already been created");
+      		res.status(400).send("You have already applied to this company");
       		}	
       	})
         .catch(err => {
@@ -54,7 +55,7 @@ applicationRouter.get('/:username', (req, res) => {
     User.findOne({username: req.params.username})
     .then(_user => {
       Application.find({user: _user._id}).sort({date: 'desc'}).limit(5)
-      .then(applications => {         
+      .then(applications => {        
             res.status(200).json(applications.map(application => application.serialize()))
       });
     })
@@ -83,7 +84,7 @@ applicationRouter.get('/:username/:sort', (req, res) => {
                     return 1;
                   }
                   else if (a.name < b.name) {
-                    return -1;
+                    return -1;  
                   } 
                   else if (a.name === b.name) {
                     return 0;
@@ -141,8 +142,6 @@ applicationRouter.delete('/', jsonParser, (req, res) => {
 
      User.findOne({username: req.body.username})
      .then(_user => {
-      console.log(req.body.name);
-      console.log(_user);
         Application.findOneAndDelete({user: _user._id, name: req.body.name})
         .then(function() {
           res.status(204).send("Deleted data");
