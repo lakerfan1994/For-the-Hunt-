@@ -95,6 +95,37 @@ Returns the last 5 event applied to from most recent down
 Deletes the selceted event based on name and user
 
 
+<h2>Technologies Used</h2>
+
+
+<h3>Front End</h3>
+<ul>
+	<li>HTML5</li>
+	<li>CSS</li>
+	<li>Javascript</li>
+	<li>JQuery</li>
+	<li>AJAX</li>
+</ul>
+
+<h3>Back End</h3>
+
+<ul>
+	<li>Node.js</li>
+	<li>Express</li>
+	<li>MongoDB</li>
+	<li>Bcrypt</li>
+</ul>
+
+<h3>Testing and Deployment</h3>
+<ul>
+	<li>Heroku</li>
+	<li>Mocha</li>
+	<li>Chai</li>
+	<li>Travis CI</li>
+</ul>
+
+
+
 
 
 
