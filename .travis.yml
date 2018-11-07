@@ -4,7 +4,7 @@ deploy:
   provider: heroku
   api_key:
     secure: ScfQrNZEEtl6160BXTsQgGGB6eONXzO6oAgMiDF4N4EfkldOQ0+ZUWzHZAXNklH+SLXruToG8j12T8NEWWGASVWxO8P/ojYX/kiFEbFjznVNAEFs2OgAVqiZtDs/ayD1E3ENJNJ9esSLbRYwxPi2R5SOWgdGiodeRQWXWZJ9F6EvjbFZe+4N7THGVd1KGpkBpf8D/jM4ntg5r41OB7srwrmNOvUD5Te9g/N1ZA+LXhPVVuZpvUxgcR/AGsbmrPr+JWsSra04ZCDJpRkiSkvvtY9AX/A/zcHnj36TgP0eO6hAbmriMdn1qv0jcoQlAcx19frbNHtdrnAC+YfVeR9eoQRPG2hfewYcS7n2zbPAev5JqUBnPsftupwf6gBhTo4lz8A99o4B2RTOTF3uOk4w+OpHAj/a6YsXQdCnD57Bq3RAfv4j0jdWWt1/HLjwwuP1mlMWmNQvBwYvTztgEcNppOE7aeXI8kthb4n6tVKh0CLVoBJBCKK+AFAdvmu1gyafnAsOKPFP+O15DfUT9IMe0PWML4GItf2Nx8uilSVHHqjNq8u6TO6ALiN5EoI3D/A3BzPKVuwqQxvnO2lTLp8TkQNkeekzVt7/EF5iL+Fxh6k+uFxW2zQ5SPKmFx+k7ne9YeDnfdCVnrGzNYx3Lj6gFTUcQpWMf19OB8KaoqCihaw=
-  app: afternoon-dusk-20040
+  app: forthehunt
   on:
     repo: lakerfan1994/For-the-Hunt-
  
