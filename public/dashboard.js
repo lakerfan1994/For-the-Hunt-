@@ -156,11 +156,12 @@
   }
 
   function appAlreadyExistsError(data) {
+    $('.application-error').removeClass('hidden');
     $('.application-error').append(`<h4>${data.responseText}</h4>`);
   }
 
   function eventAlreadyExistsError(data) {
-
+    $('.event-error').removeClass('hidden');
     $('.event-error').append(`<h4>${data.responseText}</h4>`);
   }
 
@@ -260,7 +261,11 @@
   function cleanCode(data) {
     $('.application-error').text('');
     $('.event-error').text('');
-    console.log('yiss, shit worked!');
+    $('.application-error').addClass('hidden');
+    $('.event-error').addClass('hidden');
+    let _username = $('.current-user').text().trim();
+    getApplicationData(_username, 'date');
+    getEventData(_username, 'date');
   }
 
 
@@ -278,8 +283,8 @@
       let newApplication = {name: _name, date: _date, role: _role, location: _location, username: _username,
         interviewExistence: _interviewExistence, eventType: _eventType};
 
-      createNewApplicationInDatabase(newApplication);
-      getApplicationData(_username, 'date');
+      createNewApplicationInDatabase(newApplication); // post
+      //so problem is right here i think
       $('.application-overlay').addClass('hidden');
       $('.application-modal').addClass('hidden');
     })
@@ -302,7 +307,6 @@
        eventType: _eventType};
 
        createNewEventInDatabase(newEvent);
-       getEventData(_username, 'date');
        $('.event-overlay').addClass('hidden');
        $('.event-modal').addClass('hidden');
        

@@ -33,7 +33,7 @@ applicationRouter.post('/', jsonParser, (req, res) => {
       			})
       		}
       		else {
-      		res.status(400).send("You have already applied to this company");
+      		res.status(400).send("You have already applied to this company, please try another company");
       		}	
       	})
         .catch(err => {
