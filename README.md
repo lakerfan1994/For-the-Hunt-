@@ -43,6 +43,63 @@ https://afternoon-dusk-20040.herokuapp.com/
 ![Picture of the new eveent screen](./screenshots/new-event-screenshot.png)
 
 
+<h2>API Documentation</h2>
+
+<h3>/user</h3>
+
+<h4>POST</h4>
+
+Creates and validates a new user and stores the new user in the database
+
+<h3>/auth</h3>
+
+<h4>POST</h4>
+
+Validates the correct user and password has been entered, and returns a JWT token for it
+
+<h3>/applications</h3>
+
+<h4>POST</h4>
+
+Creates a new application, and returns the newly created appliation to the user
+
+<h4>GET username/sort</h4>
+
+Returns all applications for a given user by the sorting method used
+
+<h4>GET username</h4>
+
+Returns the last 5 applications applied to from most recent down
+
+<h4>DELETE</h4>
+
+Deletes the selected application based on name and user
+
+
+<h3>/events</h3>
+
+<h4>POST</h4>
+
+Creates a new event, and returns the newly created event to the user
+
+<h4>GET username/sort</h4>
+
+Returns all events for a given user by the sorting method used
+
+<h4>GET username </h4>
+
+Returns the last 5 event applied to from most recent down
+
+<h4>DELETE</h4>
+
+Deletes the selceted event based on name and user
+
+
+
+
+
+
+
 
 
 
