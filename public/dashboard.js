@@ -261,7 +261,7 @@
   function cleanCode(data) {
     $('.application-error').text('');
     $('.event-error').text('');
-    $('.application-error').addClass('hidden');
+    $('.application-error').addClass('hidden'); 
     $('.event-error').addClass('hidden');
     let _username = $('.current-user').text().trim();
     getApplicationData(_username, 'date');
