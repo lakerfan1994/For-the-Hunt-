@@ -3,10 +3,10 @@ const app = express();
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const {DATABASE_URL, PORT} = require('./config');
-const router = require('./user-router');
-const authRouter = require('./auth-router');
-const applicationRouter = require('./application.router');
-const eventRouter = require('./event-router');
+const router = require('./routers/user-router');
+const authRouter = require('./routers/auth-router');
+const applicationRouter = require('./routers/application.router');
+const eventRouter = require('./routers/event-router');
 
 
 

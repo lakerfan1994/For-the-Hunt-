@@ -10,27 +10,25 @@
     <link href="https://fonts.googleapis.com/css?family=Bungee|Bungee+Shade" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Oswald|Spicy+Rice" rel="stylesheet">
     <script
-  src="https://code.jquery.com/jquery-3.3.1.js"
-  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-  crossorigin="anonymous"></script>
-   <script src="dashboard.js"></script>
+      src="https://code.jquery.com/jquery-3.3.1.js"
+      integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+      crossorigin="anonymous"></script>
+    <script src="dashboard.js"></script>
   </head>
   <body>
-
     <div class="current-user">
     </div>
 
-
     <div class="homepage-navbar">
-        <div class="balance-div">
-        </div>
-        <div class="homepage-signup">
-          <a href="#"><h3 class="centered-text">Sign Up</h3></a>
-        </div>
-        <div class="homepage-login">
-          <a href= "#"><h3 class="centered-text">Login</h3></a>
-        </div>
+      <div class="balance-div">
       </div>
+      <div class="homepage-signup">
+        <a href="#"><h3 class="centered-text">Sign Up</h3></a>
+      </div>
+      <div class="homepage-login">
+        <a href= "#"><h3 class="centered-text">Login</h3></a>
+      </div>
+    </div>
 
    <header> 
     <div class="homepage">
@@ -40,7 +38,7 @@
       </div>
     </div>
 
-     <div class="sign-up-main hidden">
+      <div class="sign-up-main hidden">
         <div class="row ">
           <div class=" sign-up col-6">
             <h2 class="centered-text">For the Hunt! Find your dream job today</h2>
@@ -52,15 +50,15 @@
                 <label class="aria-friendly-label" for="signup-password">Enter your Password</label>
                 <input class="sign-up-child" type="password" id="signup-password" placeholder="Password" required maxlength="30">
                 <div class="split-buttons">
-                <div class="sign-up-submit-div centered-text">
-                  <button type="submit" class="sign-up-submit">Submit</button>
+                  <div class="sign-up-submit-div centered-text">
+                    <button type="submit" class="sign-up-submit">Submit</button>
+                  </div>
+                  <div class= 'back-to-home centered-text'>
+                    <button>Back to Homepage</button> 
+                  </div>
                 </div>
-                 <div class= 'back-to-home centered-text'>
-                     <button>Back to Homepage</button> 
-                 </div>
-               </div>
               </form>
-          </div>
+            </div>
             <div class="user-validation hidden" aria-live='assertive'>
               <h4 class="centered-text">Username has already been taken, please select another.</h4>
             </div>
@@ -77,7 +75,6 @@
         </div>  
       </div>
 
-
       <div class="login-main hidden">
         <div class="row">
           <div class="login col-4">
@@ -88,12 +85,12 @@
               <label class="aria-friendly-label" for="password">Enter your Password</label>
               <input class="login-child login-password" required type="password" id="password" placeholder="Password" maxlength="30">
               <div class= "login-submit-button-div centered-text">
-                 <button type="submit" class="login-submit">Login</button>
+                <button type="submit" class="login-submit">Login</button>
               </div>
             </form>
-             <div class= 'back-to-home centered-text'>
+            <div class= 'back-to-home centered-text'>
               <button>Back to Homepage</button>
-             </div>
+            </div>
 
              <div class="login-validation hidden" aria-live="assertive">
               <h4 class="centered-text">Username or password incorrect</h4>
@@ -115,134 +112,132 @@
         <div class="nav-button nav-logout"><a href="#"><p class="centered-text">Logout<i class="fas fa-home"></i></p></a></div>
       </div>
     </nav>
-    <main>
 
-      <div class="dashboard hidden ">
-        <div class="row">
-          <h2 class="cool-font centered-text">For the Hunt! Dashboard</h2>
-        </div>
-        <div class="most-recent-main-container">
+  <main>
+    <div class="dashboard hidden ">
+      <div class="row">
+        <h2 class="cool-font centered-text">For the Hunt! Dashboard</h2>
+      </div>
+      <div class="most-recent-main-container">
         <div class="most-recent-main top">
-            <h2 class= "centered-text">Most Recent Applications</h2>
-            <div class="most-recent applications-dashboard">
-              <div class= "application-container centered-text">
-                  <div class="application-item">
-                      <h2>Company</h2>
-                  </div>
-                  <div class="application-item not-on-small-screens">
-                    <h2>Role</h2>
-                  </div>
-                  <div class="application-item">
-                    <h2>Date Applied</h2>
-                  </div>
-               </div>
+          <h2 class= "centered-text">Most Recent Applications</h2>
+          <div class="most-recent applications-dashboard">
+            <div class= "application-container centered-text">
+              <div class="application-item">
+                <h2>Company</h2>
+              </div>
+              <div class="application-item not-on-small-screens">
+                <h2>Role</h2>
+              </div>
+              <div class="application-item">
+                <h2>Date Applied</h2>
+              </div>
             </div>
+          </div>
         </div>
         <div class="most-recent-main">
           <h2 class= "centered-text">Upcoming Events</h2>
           <div class="most-recent interviews-dashboard">
             <div class= "event-container centered-text">
-                  <div class="event-item">
-                      <h2>Event</h2>
-                  </div>
-                  <div class="event-item not-on-small-screens">
-                    <h2>Date</h2>
-                  </div>
-                  <div class="event-item">
-                    <h2>Location</h2>
-                  </div>
-               </div>
-
+              <div class="event-item">
+                <h2>Event</h2>
+              </div>
+              <div class="event-item not-on-small-screens">
+                <h2>Date</h2>
+              </div>
+              <div class="event-item">
+                <h2>Location</h2>
+              </div>
+            </div>
           </div>
         </div>
-       </div>   
-      </div> 
+      </div>   
+    </div> 
 
 <!-- supposed to be a overlay over the main application div below -->
-      <div class="application-overlay hidden  "></div>
-      <div class= "application-modal col-6 hidden ">
-       <a href="#"><p class="application-exit">Back to list   <i class="fas fa-sign-out-alt"></i></p></a>
-       <form class="new-application-form" aria-live= "assertive">
-        <div class= new-application>
-          <header class="new-application-header">New Application</header>
-          <div class="new-application-form-input-container">
-            <label for="application-company">Name of Company ex. Google</label>
-            <input class= "new-application-form-input" type="text" id="application-company" required placeholder="Name of Company, ex. Google">
-          </div>
-          <div class="new-application-form-input-container">
-            <label for="application-role">Position applied for ex. Developer</label>
-            <input class= "new-application-form-input" type= "text" id= "application-role" required placeholder="Position applied for ex. Developer">
-          </div>
-          <div class="new-application-form-input-container">
-             <label for="application-location">Location ex. San Francisco</label>
-             <input class= "new-application-form-input" type= "text" id= "application-location"required placeholder="Location ex. San Franscisco">  
-          </div>
+    <div class="application-overlay hidden  "></div>
+    <div class= "application-modal col-6 hidden ">
+     <a href="#"><p class="application-exit">Back to list   <i class="fas fa-sign-out-alt"></i></p></a>
+     <form class="new-application-form" aria-live= "assertive">
+      <div class= new-application>
+        <header class="new-application-header">New Application</header>
+        <div class="new-application-form-input-container">
+          <label for="application-company">Name of Company ex. Google</label>
+          <input class= "new-application-form-input" type="text" id="application-company" required placeholder="Name of Company, ex. Google">
         </div>
-          <div class="application-submit-button-container">
-              <button type="submit" class="application-submit-button"><p>Submit</p></button> 
-          </div>  
-       </form>   
+        <div class="new-application-form-input-container">
+          <label for="application-role">Position applied for ex. Developer</label>
+          <input class= "new-application-form-input" type= "text" id= "application-role" required placeholder="Position applied for ex. Developer">
+        </div>
+        <div class="new-application-form-input-container">
+           <label for="application-location">Location ex. San Francisco</label>
+           <input class= "new-application-form-input" type= "text" id= "application-location"required placeholder="Location ex. San Franscisco">  
+        </div>
+      </div>
+      <div class="application-submit-button-container">
+        <button type="submit" class="application-submit-button"><p>Submit</p></button> 
+      </div>  
+     </form>   
+    </div> 
+
+
+    <div class="application hidden">
+      <div class="row">
+        <h2 class="cool-font centered-text">For the Hunt! Applications</h2>
+      </div>
+      <div class="application-error centered-text">
       </div> 
-
-
-      <div class="application hidden">
-        <div class="row">
-          <h2 class="cool-font centered-text">For the Hunt! Applications</h2>
+      <div class="col-6 application-box">
+        <h2 class="centered-text application-header">List of Applications</h2>
+        <button class= "col-6 create-application">Create a new application</button>
+        <div class= "application-container centered-text">
+          <div class="application-item">
+            <h2>Company</h2>
           </div>
-          <div class="application-error centered-text">
+          <div class="application-item not-on-small-screens">
+            <h2>Role</h2>
+          </div>
+          <div class="application-item">
+            <h2>Date Applied</h2>
+          </div>
+          <div class= "application-button">
+            <i class="fas fa-edit list-legend"></i>
+          </div>
+          <div class= " application-button">
+            <i class="fas fa-trash-alt list-legend"></i>
           </div> 
-          <div class="col-6 application-box">
-            <h2 class="centered-text application-header">List of Applications</h2>
-            <button class= "col-6 create-application">Create a new application</button>
-            <div class= "application-container centered-text">
-                  <div class="application-item">
-                      <h2>Company</h2>
-                  </div>
-                  <div class="application-item not-on-small-screens">
-                    <h2>Role</h2>
-                  </div>
-                  <div class="application-item">
-                    <h2>Date Applied</h2>
-                  </div>
-                  <div class= "application-button">
-                    <i class="fas fa-edit list-legend"></i>
-                  </div>
-                  <div class= " application-button">
-                    <i class="fas fa-trash-alt list-legend"></i>
-                  </div> 
-            </div>
-          </div>    
-        </div>  
-      </div>
+        </div>
+      </div>    
+    </div>  
 
-      <div class="events-and-interviews hidden">
-        <div class="row">
-          <h2 class="cool-font centered-text">For the Hunt! Events</h2>
-            <div class="event-error centered-text">
+    <div class="events-and-interviews hidden">
+      <div class="row">
+        <h2 class="cool-font centered-text">For the Hunt! Events</h2>
+        <div class="event-error centered-text">
+        </div>
+        <div class="col-6 event-box">
+          <h2 class="centered-text event-header">List of Events</h2>
+          <button class= "col-6 create-event">Create a new event</button>
+          <div class= "event-container centered-text">
+            <div class="event-item">
+              <h2>Event</h2>
             </div>
-            <div class="col-6 event-box">
-               <h2 class="centered-text event-header">List of Events</h2>
-               <button class= "col-6 create-event">Create a new event</button>
-               <div class= "event-container centered-text">
-                  <div class="event-item">
-                    <h2>Event</h2>
-                  </div>
-                  <div class="event-item not-on-small-screens">
-                    <h2>Type</h2>
-                  </div>
-                  <div class="event-item">
-                    <h2>Date</h2>
-                  </div>
-                  <div class= "event-item">
-                    <h2>Location</h2>
-                  </div>
-                  <div class= " event-button">
-                    <i class="fas fa-trash-alt list-legend"></i>
-                  </div> 
-            </div>`
+            <div class="event-item not-on-small-screens">
+              <h2>Type</h2>
+            </div>
+            <div class="event-item">
+              <h2>Date</h2>
+            </div>
+            <div class= "event-item">
+              <h2>Location</h2>
+            </div>
+            <div class= " event-button">
+              <i class="fas fa-trash-alt list-legend"></i>
+            </div> 
           </div>
         </div>
       </div>
+    </div>
 
     <div class="event-overlay hidden "></div>
       <div class= "event-modal hidden col-6">
@@ -251,8 +246,8 @@
         <div class="new-event">
           <header class="new-event-header">New Meetup</header>
           <div class="new-event-form-input-container">
-              <label for="meetup"><span class=" input-checkbox">Name of Meetup</span></label>
-              <input class= "new-event-form-input" type="text" id="meetup" required placeholder="Name of Meetup">
+            <label for="meetup"><span class=" input-checkbox">Name of Meetup</span></label>
+            <input class= "new-event-form-input" type="text" id="meetup" required placeholder="Name of Meetup">
           </div>
           <div class="new-event-form-input-container">
             <label for="event-date"><span class=" input-checkbox">Date of Event</span></label>
@@ -266,15 +261,12 @@
             <label class="input-checkbox" for="meetup-type">Is this an interview?</label>
             <input class="new-event-form-input" type= "checkbox" id="meetup-type">
           </div>         
-         </div> 
-          <div class="event-submit-button-container">
-              <button type="submit" class="event-submit-button"><p>Submit</p></button> 
-          </div>  
+        </div> 
+        <div class="event-submit-button-container">
+          <button type="submit" class="event-submit-button"><p>Submit</p></button> 
+        </div>  
        </form>   
-      </div> 
-
-        </div>
-      </div>
-     </main>   
-  </body>
+    </div> 
+  </main>   
+ </body>
 </html>

@@ -7,6 +7,10 @@ specific appliations and interviews in a interactive dashboard that displays the
 
 https://afternoon-dusk-20040.herokuapp.com/
 
+<h4>Test username</h4>
+Username: test
+Password: testtesttest
+
 
 <h2>Screenshots</h2>
 
