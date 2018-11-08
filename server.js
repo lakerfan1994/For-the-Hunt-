@@ -23,40 +23,38 @@ app.use('/events', eventRouter);
 
 //connects to the database, and starts the server
 function runServer(databaseUrl, port =PORT) {
-    return new Promise((resolve, reject) => {
-      mongoose.connect(
-        databaseUrl,
-        err => {
-          if(err) {
-            return reject(err);
-          }
-          server = app
-            .listen(port, () => {
-              console.log(`Your app is listening on port ${port}`);
-              resolve();
-            })
-            .on("error", err => {
-              mongoose.disconnect();
-              reject(err);
-            });
+  return new Promise((resolve, reject) => {
+    mongoose.connect(
+      databaseUrl,
+      err => {
+        if(err) {
+          return reject(err);
         }
-      );
-    })
-  };
+        server = app
+        .listen(port, () => {
+          resolve();
+        })
+        .on("error", err => {
+          mongoose.disconnect();
+          reject(err);
+        });
+      }
+    );
+  })
+};
 
 //disconnects from the database and closes the server
- function closeServer() {
-    return mongoose.disconnect().then(() => {
-      return new Promise((resolve, reject) => {
-        console.log("Closing server");
-        server.close(err => {
-          if (err) {
-            return reject(err);
-          }
-          resolve();
-        });
+function closeServer() {
+  return mongoose.disconnect().then(() => {
+    return new Promise((resolve, reject) => {
+      server.close(err => {
+        if (err) {
+          return reject(err);
+        }
+        resolve();
       });
     });
+  });
 };
 
 //clever!!! this basically allows for the app to run and use the DATABASE url if and only if the app is run from the server,
@@ -64,7 +62,6 @@ function runServer(databaseUrl, port =PORT) {
 if (require.main === module) {
   runServer(DATABASE_URL).catch(err => console.log(err));
 };
-
 
 
 module.exports = { app, runServer, closeServer };

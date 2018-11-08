@@ -35,8 +35,6 @@ router.post('/', jsonParser, (req, res) => {
     });
   }
 
-
-
   const explicityTrimmedFields = ['username', 'password'];
   const nonTrimmedField = explicityTrimmedFields.find(
     field => req.body[field].trim() !== req.body[field]
@@ -60,6 +58,7 @@ router.post('/', jsonParser, (req, res) => {
       max: 72
     }
   };
+
   const tooSmallField = Object.keys(sizedFields).find(
     field =>
       'min' in sizedFields[field] &&
@@ -84,11 +83,11 @@ router.post('/', jsonParser, (req, res) => {
     });
   }
 
-   goodUsername = req.body.username.replace(/[^a-zA-Z ]/g, "");
+  goodUsername = req.body.username.replace(/[^a-zA-Z ]/g, "");
 
-   if(!(req.body.username === goodUsername)){
-        return res.status(422).send('Username must not contain special characters');
-      }
+  if(!(req.body.username === goodUsername)){
+    return res.status(422).send('Username must not contain special characters');
+  }
 
 
 
@@ -125,19 +124,6 @@ router.post('/', jsonParser, (req, res) => {
       res.status(500).json({code: 500, message: 'Internal server error'});
     });
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 module.exports = router;

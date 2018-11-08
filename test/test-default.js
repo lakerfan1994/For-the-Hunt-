@@ -121,7 +121,7 @@ describe('Initial tests', function() {
 				.post('/applications')
 				.send(googleApp)
 				.then(function(res) {
-					expect(res).to.have.status(200);
+					expect(res).to.have.status(201);
 				})
 			})
 

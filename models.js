@@ -6,9 +6,9 @@ mongoose.Promise = global.Promise;
 
 //user schema
 const userSchema = mongoose.Schema({
- 	username: {type: String, required: true, unique: true},
- 	password: {type: String, required: true}
- });
+	username: {type: String, required: true, unique: true},
+	password: {type: String, required: true}
+});
 
 //application schema
 const applicationSchema = mongoose.Schema({
@@ -29,40 +29,40 @@ const meetupSchema = mongoose.Schema({
 });
 
 applicationSchema.pre('find', function(next){
-  this.populate('user');
-  next();
+	this.populate('user');
+	next();
 });
 
- applicationSchema.pre('findOne', function(next){
-  this.populate('user');
-  next();
+applicationSchema.pre('findOne', function(next){
+  	this.populate('user');
+  	next();
 });
 
- applicationSchema.pre('save', function(next){
-  this.populate('user');
-  next();
+applicationSchema.pre('save', function(next){
+  	this.populate('user');
+ 	next();
 });
 
- meetupSchema.pre('find', function(next){
-  this.populate('user');
-  next();
+meetupSchema.pre('find', function(next){
+  	this.populate('user');
+ 	next();
 });
 
- meetupSchema.pre('findOne', function(next){
-  this.populate('user');
-  next();
+meetupSchema.pre('findOne', function(next){
+  	this.populate('user');
+  	next();
 });
 
- meetupSchema.pre('save', function(next){
-  this.populate('user');
-  next();
+meetupSchema.pre('save', function(next){
+	this.populate('user');
+  	next();
 });
 
 
 userSchema.methods.serialize = function() {
-  return {
-    username: this.username || ''
-  };
+	return {
+    	username: this.username || ''
+  	};
 };
 
 applicationSchema.methods.serialize = function() {
@@ -87,14 +87,12 @@ meetupSchema.methods.serialize = function() {
 
 
 userSchema.methods.validatePassword = function(password) {
-  return bcrypt.compare(password, this.password);
+	return bcrypt.compare(password, this.password);
 };
 
 userSchema.statics.hashPassword = function(password) {
-  return bcrypt.hash(password, 10);
+	return bcrypt.hash(password, 10);
 };
-
-
 
 
 const User = mongoose.model('User', userSchema);
