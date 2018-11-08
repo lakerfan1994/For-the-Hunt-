@@ -3,7 +3,7 @@ let applicationRouter = express.Router();
 const {Application, User} = require('./models');
 const jsonParser = express.json();
 
-
+//Validates then creates a new application for a given user
 applicationRouter.post('/', jsonParser, (req, res) => {
      const neededKeys = ["name", "date", "role", "location", "username",
       "interviewExistence", "eventType"];
@@ -45,6 +45,7 @@ applicationRouter.post('/', jsonParser, (req, res) => {
       });
    });
 
+//After validation, returns the last 5 applications created for a given user
 applicationRouter.get('/:username', (req, res) => {
     const requiredKey = "username";
 
@@ -64,6 +65,7 @@ applicationRouter.get('/:username', (req, res) => {
     })
 })
 
+//After validation returns all applications created by a given user sorted using the sort defined in the params
 applicationRouter.get('/:username/:sort', (req, res) => {
     const requiredKey = "username";
     const requiredKey2 = "sort";
@@ -130,7 +132,7 @@ applicationRouter.get('/:username/:sort', (req, res) => {
     })
 })
 
-
+//Deletes a application based on the username and name of application provided
 applicationRouter.delete('/', jsonParser, (req, res) => {
      neededKeys = ["name", "username"];
      for(let i = 0; i < neededKeys.length; i++) {

@@ -32,7 +32,7 @@ app.get("/dashboard", (req, res) => {
 
 
 
-
+//connects to the database, and starts the server
 function runServer(databaseUrl, port =PORT) {
     return new Promise((resolve, reject) => {
       mongoose.connect(
@@ -55,7 +55,7 @@ function runServer(databaseUrl, port =PORT) {
     })
   };
 
-
+//disconnects from the database and closes the server
  function closeServer() {
     return mongoose.disconnect().then(() => {
       return new Promise((resolve, reject) => {

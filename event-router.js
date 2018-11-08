@@ -3,7 +3,7 @@ let eventRouter = express.Router();
 const {Meetup, User, Application} = require('./models');
 const jsonParser = express.json();
 
-
+//Validates the info sent in the request body, then creates a new user upon completing validation
 eventRouter.post('/', jsonParser, (req, res) => {
      const neededKeys = ["name", "location", "username", "eventType", "dateOfEvent"];
 
@@ -43,6 +43,7 @@ eventRouter.post('/', jsonParser, (req, res) => {
       });
    });
 
+//after validation, returns the 5 most recent events created
 eventRouter.get('/:username', (req, res) => {
     const requiredKey = "username";
 
@@ -62,7 +63,7 @@ eventRouter.get('/:username', (req, res) => {
     })
 })
 
-
+//after validation, returns all applications from a given user sorted by the sort defined in the params
 eventRouter.get('/:username/:sort', (req, res) => {
     const requiredKey = "username";
     const requiredKey2 = "sort";
@@ -126,7 +127,7 @@ eventRouter.get('/:username/:sort', (req, res) => {
     })
 })
 
-
+//Deletes a event that matches the name defined and the username
 eventRouter.delete('/', jsonParser, (req, res) => {
      neededKeys = ["name", "username"];
      for(let i = 0; i < neededKeys.length; i++) {

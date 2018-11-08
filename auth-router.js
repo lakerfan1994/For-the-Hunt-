@@ -41,7 +41,7 @@ const localAuth = function(req, res, next) {
 };
 
  
-// The user provides a username and password to login
+// The user provides a username and password to login and receives a JWT token in response
 authRouter.post('/', localAuth, (req, res) => {
   const authToken = createAuthToken(req.body);
   res.status(201).json({authToken, username: req.body.username});

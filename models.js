@@ -4,12 +4,13 @@ const bcrypt = require('bcryptjs');
 mongoose.Promise = global.Promise;
 
 
-
+//user schema
 const userSchema = mongoose.Schema({
  	username: {type: String, required: true, unique: true},
  	password: {type: String, required: true},
  });
 
+//application schema
 const applicationSchema = mongoose.Schema({
 	name: {type: String, required: true},
 	date: {type: Date, required: true},
@@ -22,6 +23,7 @@ const applicationSchema = mongoose.Schema({
 	interviewQuestions: {type: String, required: false}
 });
 
+//meetup schema
 const meetupSchema = mongoose.Schema({
 	name: {type: String, required: true},
 	user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
@@ -101,11 +103,6 @@ userSchema.statics.hashPassword = function(password) {
 };
 
 
-
-
-//applications: [{name: String,  role: String, date: Date, location: String, interviewExistence: Boolean, eventType: String,
- 	// dateOfEvent: Date, interviewQuestions: String}],
- //	meetups:[{name: String, dateOfEvent: Date, location: String, eventType: String}]
 
 
 const User = mongoose.model('User', userSchema);
