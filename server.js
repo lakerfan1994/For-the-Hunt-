@@ -21,17 +21,6 @@ app.use('/events', eventRouter);
 
 
 
-
-
-app.get("/dashboard", (req, res) => {
-	console.log(__dirname);
-	res.sendFile(`${__dirname}/public/dashboard.html`);
-})
-
-
-
-
-
 //connects to the database, and starts the server
 function runServer(databaseUrl, port =PORT) {
     return new Promise((resolve, reject) => {

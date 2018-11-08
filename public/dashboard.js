@@ -2,7 +2,9 @@
  const meetupUrl = "/events";
  const userUrl = "/user";
  const loginUrl = "/login";
- 
+
+
+ //Creates a new user in database
   function addUserToDatabase(user) {
     const params = {
       method: 'POST',
@@ -15,6 +17,7 @@
     $.ajax(params);
   }
 
+//Ajax call that generates a JWT token authorizing the user to login
   function loginUserInDatabase(user) {
     const params = {
       method: 'POST',
@@ -29,6 +32,7 @@
     
   }
 
+//POST request that creates a new application
   function createNewApplicationInDatabase(app) {
     const params = {
       method: 'POST',
@@ -36,12 +40,13 @@
       url: applicationsUrl,
       data: JSON.stringify(app),
       error: appAlreadyExistsError,
-      success: cleanCode   
+      success: refreshData   
     }
 
     $.ajax(params);
   }
 
+//POST request that creates a new event
   function createNewEventInDatabase(app) {
     const params = {
       method: 'POST',
@@ -49,34 +54,37 @@
       url: meetupUrl,
       data: JSON.stringify(app),
       error: eventAlreadyExistsError,
-      success: cleanCode
+      success: refreshData
     }
 
     $.ajax(params);
   }
 
+//GET request that takes in a username and a category to sort by and returns all appplications by the given user sorted 
+//by the given sort
   function getApplicationData(_username, _sort) {
     $('.application-error').text('');
     $('.event-error').text('');
     const params = {
       method: 'GET',
       url: `${applicationsUrl}/${_username}/${_sort}`,
-      success: displayUserApplications,
-      error: brokenCode
+      success: displayUserApplications
     }
 
     $.ajax(params);
   }
+
+  //GET method that just returns the 5 most recent applications by the given username
   function getRecentApplicationData(username) {
     const params = {
       method: 'GET',
       url: `${applicationsUrl}/${username}`,
-      success: displayRecentUserApplications,
-      error: brokenCode
+      success: displayRecentUserApplications
     }
     $.ajax(params);
   }
 
+//GET method that returns all events by a given user sorted by the given sort
   function getEventData(_username, _sort) {
     $('.application-error').text('');
     $('.event-error').text('');
@@ -89,23 +97,23 @@
     $.ajax(params);
   }
 
+//GET method that returns the 5 most recent events.
   function getRecentEventData(username) {
     const params = {
       method:'GET',
       url: `${meetupUrl}/${username}`,
-      success: displayRecentUserEvents,
-      error: brokenCode
+      success: displayRecentUserEvents
     }
     $.ajax(params);
   }
 
+//Delete method that deletes a given application
   function deleteApplicationData(app) {
     const params = {
       method: 'DELETE',
       contentType: 'application/json',
       url: applicationsUrl,
       data: JSON.stringify(app),
-      error: brokenCode,
       success: function(data) {
         getApplicationData(app.username, 'date')
       }
@@ -114,13 +122,13 @@
     $.ajax(params);
   }
 
+//DELETE method that deletes a given event
   function deleteEventData(event) {
     const params = {
       method: 'DELETE',
       contentType: 'application/json',
       url: meetupUrl,
       data: JSON.stringify(event),
-      error: brokenCode,
       success: function(data) {
         getEventData(event.username, 'date');
       }
@@ -128,18 +136,8 @@
     $.ajax(params);
   }
 
-  function updateApplicationData(app) {
-    //when you come back to this, make a separate interview screen for the interview part of the app
-    const params = {
-      method: 'PUT',
-      contentType: 'application/json',
-      url: applicationsUrl,
-      data: JSON.stringify(app),
-      error: brokenCode,
-      success: cleanCode
-    }
-  }
 
+//Opens up an error box alerting the user that the user already exists
   function userAlreadyExists(data) {
     $('.user-validation').removeClass('hidden');
     $('.user-validation').focus();
@@ -148,6 +146,7 @@
     $('#signup-username').val('');
   }
 
+//Opens up an error box alerting the user that the password was incorrect
   function usernameOrPasswordIncorrect(data) {
     $('.login-validation').removeClass('hidden');
     $('.login-validation').focus();
@@ -155,16 +154,21 @@
     $('.login-password').val('');
   }
 
+//Opens up an error box alerting the user that an application with the given name 
+//has already been created
   function appAlreadyExistsError(data) {
     $('.application-error').removeClass('hidden');
     $('.application-error').append(`<h4>${data.responseText}</h4>`);
   }
 
+//Opens up an error box alerting the user that an event with the given name ahs already been created
   function eventAlreadyExistsError(data) {
     $('.event-error').removeClass('hidden');
     $('.event-error').append(`<h4>${data.responseText}</h4>`);
   }
 
+// Retrieves information from the sign-up page, does some client side validation, then sends data
+//to the api to create a new user
   function submitSignupForm() {
     $('.sign-up-parent').submit(function(event) {
       event.preventDefault();
@@ -199,6 +203,7 @@
     })
   }
 
+//Takes information from the login page, and sends the information to the api to accept a JWT token
   function loginFromLoginPage() {
     $('.login-parent').submit(function(event) {
       event.preventDefault();
@@ -210,7 +215,9 @@
     }) 
   }
 
-
+//Upon successful login, take the JWT token provided by the api layer, store it in localStorage, then 
+//open up the user dashboard and the main website, and send calls to the api layer for information on 
+//the most recent applications and events the user has created. 
   function loginSuccess(data) {
     let jwtToken = data.authToken
     localStorage.setItem("authToken", jwtToken);
@@ -227,6 +234,8 @@
 
   }
 
+//Function that checks whenever the server is run to see whether there is a jwt token stored in localstorage.
+//If yes, the token is parsed for the user within it, and used to open up the given users dashboard
   function onPageLoad(){
     if(localStorage.getItem('authToken')) {
       let token = localStorage.getItem('authToken');
@@ -246,6 +255,8 @@
     }
   }
 
+//Upon successfully signing up and creating a new user, this function reveals a button the user can press
+//to then automatically log in to the website
   function confirmUser() {
     $('.user-confirm').removeClass('hidden');
     $('.user-validation').addClass('hidden');
@@ -253,12 +264,9 @@
     $('.password-validation').addClass('hidden');
   }
 
-
-  function brokenCode(data) {
-    console.log(data);
-  }
-
-  function cleanCode(data) {
+//Upon successfully creating either an application or an event, this function empties the dom of error messages
+// concerning app creation and makes a request to the api for app data.
+  function refreshData(data) {
     $('.application-error').text('');
     $('.event-error').text('');
     $('.application-error').addClass('hidden'); 
@@ -269,6 +277,8 @@
   }
 
 
+//This function creates and validates the data for a new application, then sends it to the API to finalize
+//creation of the new application
   function submitNewApplication(){
     $('.new-application-form').submit(function(event){
       event.preventDefault();
@@ -283,14 +293,13 @@
       let newApplication = {name: _name, date: _date, role: _role, location: _location, username: _username,
         interviewExistence: _interviewExistence, eventType: _eventType};
 
-      createNewApplicationInDatabase(newApplication); // post
-      //so problem is right here i think
+      createNewApplicationInDatabase(newApplication); 
       $('.application-overlay').addClass('hidden');
       $('.application-modal').addClass('hidden');
     })
   }
 
-
+//This function creates and validates data for a new event, then sends it to the API 
   function submitNewEvent(){
     $('.new-event-form').submit(function(event){
       event.preventDefault();
@@ -315,7 +324,8 @@
 
 
 
-
+//This function is the macro function for displaying application data. It takes data from the database and runs a 
+//array function that changes the json data into html
   function displayUserApplications(data) {
     $('.application-box').text('');
     $('.application-box').append(
@@ -339,6 +349,9 @@
     $('.application-box').append(applications);
   }
 
+
+//This is the macro function for data for the user dashboard. It takes database data and runs an array function that changes
+//the json data into html
   function displayRecentUserApplications(data) {
     $('.applications-dashboard').text('');
     $('.applications-dashboard').append( `<div class= "application-container centered-text">
@@ -357,7 +370,7 @@
     $('.applications-dashboard').append(applications);
   }
 
-
+// This is the micro function that changes data from the application object returned from the database into html
   function createApplicationObject(application) {
       return `<div class= "application-container centered-text">
                   <div class="application-item application-name">
@@ -376,6 +389,7 @@
 
   }
 
+//This is a micro function that changes data to be displayed in the dashboard into html
   function createRecentApplicationObject(app) {
     return `<div class= "application-container centered-text">
                   <div class="application-item">
@@ -390,6 +404,8 @@
                </div>`
   }
 
+//Function that tracks when certain buttons are clicked in the DOM. Upon a click, it then creates a application 
+//object ot be deleted in the api layer
   function deleteUserApplication() {
     $('.application-box').on('click', '.application-delete', function(){
       let _username = $('.current-user').text().trim();
@@ -399,6 +415,7 @@
     })
   }
 
+//function that creates a event object to be deleted in the database 
   function deleteUserEvent() {
     $('.event-box').on('click', '.event-delete', function(){
       let _username = $('.current-user').text().trim();
@@ -408,15 +425,9 @@
     })
   }
 
-    function addUserInterview() {
-    $('application-box').on('click', 'application-update', function() {
-      let _username = $('.current-user').text().trim();
-      let _name = $(this).siblings('.application-update').text().trim();
-      let app = {username: _username, name: _name};
 
-    } )
-  }
 
+//this is a macro function that utilizes a map array funcrion to change an array of events into an array of html
   function displayUserEvents(data) {
 
     $('.event-box').text('');
@@ -444,6 +455,7 @@
 
   }
 
+//This is a macro function that is used to change an array of events to be posted to the dashboard into html
     function displayRecentUserEvents(data) {
     $('.interviews-dashboard').html('');
     $('.interviews-dashboard').append(`<div class= "event-container centered-text">
@@ -462,6 +474,8 @@
     $('.interviews-dashboard').append(events);
   }
 
+
+//This is a function that takes an event object and changes it into html
   function createEventObject(event){
       return `<div class= "event-container centered-text">
                   <div class="event-item event-name">
@@ -482,6 +496,7 @@
             </div>`
   }
 
+// function that takes event data for the dashboard and changes it into html
    function createRecentEventObject(app) {
     return ` <div class= "event-container centered-text">
                   <div class="event-item">
@@ -496,7 +511,14 @@
                </div>`
   }
 
+//The following functions below this line are functions designed to allow the user to move around
+//the DOM
+//---------------------------------------------------------------------------------------------------------------------------------------------
 
+
+
+//function that runs whenever the user moves to a different page in the DOM. Its purpose is to hide all other pages that 
+//are not currently being used
   function emptyApp() {
     $('.homepage').addClass('hidden');
     $('.dashboard').addClass('hidden');
@@ -509,6 +531,7 @@
     $('.user-confirm').addClass('hidden');
   }
 
+//login user
   function moveToHomepage() {
     $('.user-confirm').on('click', '.user-confirm-button', function(){
       let _username = $('#signup-username').val().trim();
@@ -601,6 +624,8 @@
     })
   }
 
+
+//Logs out the user, as well as removing the JWT token placed into localStorage by the function loginSuccess
   function logout() {
     $('.nav-container').on('click', '.nav-logout', function() {
       emptyApp();
@@ -624,7 +649,7 @@
 
 
 
-
+//All the callback functions called within the app
   $(displayUserEvents);
   $(displayUserApplications);
   $(moveToApplicationList);
