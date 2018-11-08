@@ -44,15 +44,6 @@ describe('Initial tests', function() {
 		});		
 	})
 
-
-	it('should serve dashboard html file and return a status code upon server start', function() {
-		return chai.request(app).get('/dashboard').then(function(res) {
-				expect(res).to.have.status(200);
-				expect(res).to.be.html;	
-		});		
-
-	})
-
 	describe('User initialization', function() {
 
 		it('should create a new user if acceptable inputs are sent to the endpoint', function(){
