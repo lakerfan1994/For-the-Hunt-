@@ -150,20 +150,6 @@ body {
   border-radius: 20px;
 }
 
-
-/*.sign-up-submit {
-    display: inline-block;
-    padding: 1.0625em 1.875em;
-    border-radius: 5px;
-    font-weight: 700;
-    font-size: 1em;
-    line-height: 1.133;
-    -webkit-font-smoothing: antialiased;
-    transition: 150ms ease;
-    transition-property: background-color, border-color, box-shadow, color;
-    text-align: center;
-}*/
-
   button {
     display: inline-block;
     background: whitesmoke;
