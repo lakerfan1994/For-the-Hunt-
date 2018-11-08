@@ -5,8 +5,7 @@ const jsonParser = express.json();
 
 //Validates then creates a new application for a given user
 applicationRouter.post('/', jsonParser, (req, res) => {
-     const neededKeys = ["name", "date", "role", "location", "username",
-      "interviewExistence", "eventType"];
+     const neededKeys = ["name", "date", "role", "location", "username"];
 
       for(let i = 0; i < neededKeys.length; i++) {
       	let key = neededKeys[i];
@@ -24,11 +23,10 @@ applicationRouter.post('/', jsonParser, (req, res) => {
       	.then(app => {
       		if(!app) {
       			const newApp = {name: req.body.name, date: req.body.date, role: req.body.role, location: req.body.location,
-      				user: userId, interviewExistence: req.body.interviewExistence, eventType: req.body.eventType
+      				user: userId
       			}
       			Application.create(newApp)
       			.then(function(app){
-              console.log("are you sure");
       				res.status(201).json(app.serialize());
       			})
       		}
@@ -80,19 +78,6 @@ applicationRouter.get('/:username/:sort', (req, res) => {
       .then(applications => {
           let _applications;
          
-            if(req.params.sort === "name") {
-              _applications = applications.sort(function(a, b){
-                  if (a.name > b.name) {
-                    return 1;
-                  }
-                  else if (a.name < b.name) {
-                    return -1;  
-                  } 
-                  else if (a.name === b.name) {
-                    return 0;
-                  }
-              });
-            } 
 
             if(req.params.sort === "date") {
               _applications = applications.sort(function(a, b){
@@ -108,20 +93,6 @@ applicationRouter.get('/:username/:sort', (req, res) => {
               });
             }
 
-            if(req.params.sort === "role") {
-              _applications = applications.sort(function(a, b){
-                  if (a.role > b.role) {
-                    return 1;
-                  }
-                  else if (a.role < b.role) {
-                    return -1;
-                  } 
-                  else if (a.role === b.role) {
-                    return 0;
-                  }
-              });
-            }
-         
             res.status(201).json(_applications.map(application => application.serialize()))
             //res.status(200).json(applications.map(application => {
                   //application.serialize();

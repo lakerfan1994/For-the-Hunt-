@@ -7,7 +7,7 @@ mongoose.Promise = global.Promise;
 //user schema
 const userSchema = mongoose.Schema({
  	username: {type: String, required: true, unique: true},
- 	password: {type: String, required: true},
+ 	password: {type: String, required: true}
  });
 
 //application schema
@@ -16,11 +16,7 @@ const applicationSchema = mongoose.Schema({
 	date: {type: Date, required: true},
 	role: {type: String, required: true},
 	user: {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true},
-	location: {type: String, required: true},
-	interviewExistence: {type: Boolean, required: false},
-	eventType: {type: String, required: false},
-	dateOfEvent: {type: Date, required: false},
-	interviewQuestions: {type: String, required: false}
+	location: {type: String, required: true}
 });
 
 //meetup schema
@@ -75,11 +71,7 @@ applicationSchema.methods.serialize = function() {
 		name: this.name,
 		date: this.date,
 		role: this.role,
-		location: this.location,
-		interviewExistence: this.interviewExistence,
-		eventType: this.eventType,
-		dateOfEvent: this.dateOfEvent,
-		interviewQuestions: this.interviewQuestions
+		location: this.location
 	}
 }
 

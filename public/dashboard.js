@@ -287,11 +287,8 @@
       let _role = $('#application-role').val().trim();
       let _location = $('#application-location').val().trim();
       let _username = $('.current-user').text().trim();
-      let _interviewExistence = false;
-      let _eventType = 'Application';
 
-      let newApplication = {name: _name, date: _date, role: _role, location: _location, username: _username,
-        interviewExistence: _interviewExistence, eventType: _eventType};
+      let newApplication = {name: _name, date: _date, role: _role, location: _location, username: _username};
 
       createNewApplicationInDatabase(newApplication); 
       $('.application-overlay').addClass('hidden');

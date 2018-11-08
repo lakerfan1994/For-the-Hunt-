@@ -78,20 +78,6 @@ eventRouter.get('/:username/:sort', (req, res) => {
       .then(meetups => {
         let _meetups;
          
-            if(req.params.sort === "name") {
-              _meetups = meetups.sort(function(a, b){
-                  if (a.name > b.name) {
-                    return 1;
-                  }
-                  else if (a.name < b.name) {
-                    return -1;
-                  } 
-                  else if (a.name === b.name) {
-                    return 0;
-                  }
-              });
-            } 
-
             if(req.params.sort === "date") {
               _meetups = meetups.sort(function(a, b){
                   if (a.date > b.date) {
@@ -101,20 +87,6 @@ eventRouter.get('/:username/:sort', (req, res) => {
                     return -1;
                   } 
                   else if (a.date === b.date) {
-                    return 0;
-                  }
-              });
-            }
-
-            if(req.params.sort === "role") {
-              _meetups = meetups.sort(function(a, b){
-                  if (a.role > b.role) {
-                    return 1;
-                  }
-                  else if (a.role < b.role) {
-                    return -1;
-                  } 
-                  else if (a.role === b.role) {
                     return 0;
                   }
               });
