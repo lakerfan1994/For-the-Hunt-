@@ -143,6 +143,24 @@ describe('Initial tests', function() {
 		});
 	})
   })
+  //Below this line i commented out the test for the obsolete PUT method. If you want to test it you can take off the 
+  //comments and the commented out method in the application router and test it. 
+  //----------------------------------
+
+
+  // let googleAppUpdate ={"name": "Google","role": "Developer", "location": "San Franciico","username": "JohnSmith"}
+  // describe('PUT request for application that updates the location and the role of a appliation', function() {
+
+  // 	it('should update application data and send back a 201 message', function() {
+  // 		return chai.request(app)
+  // 		.put('/applications')
+  // 		.send(googleAppUpdate)
+  // 		.then(function(res) {
+  // 			expect(res).to.have.status(201);
+  // 			expect(res).to.be.json;
+  // 		})
+  // 	})
+  // })
 
   describe('DELETE requests to both applications and meetups', function() {
 	

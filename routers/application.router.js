@@ -122,6 +122,33 @@ applicationRouter.delete('/', jsonParser, (req, res) => {
   });
 })
 
+//Below this line is a put method I made for the app, but i decided to not use it in the end as it didnt fit with what i was 
+//doing.
+
+//----------------------------------------------------------------------------
+
+// applicationRouter.put('/', jsonParser, (req, res) => {
+//   const neededKeys = ["name", "role", "location", "username"];
+//   for(let i = 0; i < neededKeys.length; i++) {
+//     let key = neededKeys[i];
+//     if(!(key in req.body)) {
+//       res.send(`Error, ${key} is not in the request body`);
+//     }
+//   }
+
+//   User.findOne({username: req.body.username})
+//   .then(_user => {
+//     Application.findOneAndUpdate({user: _user._id, name: req.body.name}, {role: req.body.role, location: req.body.location})
+//     .then(application => {        
+//       res.status(201).json(application.serialize());
+//     });
+//   })
+//   .catch(err => {
+//     res.status(400).send("No user or application found");
+//   })
+// });
+
+
   
   
 module.exports = applicationRouter;
