@@ -75,6 +75,11 @@ Returns all applications for a given user by the sorting method used
 
 Returns the last 5 applications applied to from most recent down
 
+<h4>PUT</h4>
+
+Uses the name and username supplied to the endpoint to change the location and role of an application
+
+
 <h4>DELETE</h4>
 
 Deletes the selected application based on name and user
