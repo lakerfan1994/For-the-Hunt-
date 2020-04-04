@@ -484,6 +484,16 @@ input[type='checkbox']:checked {
   font-size: 20px;
 }
 
+.pop-message {
+  font-size: 24px;
+  color: red;
+}
+
+.success-message {
+  font-size: 24px;
+  color: lightgreen;
+}
+
 
 
 
